@@ -40,6 +40,18 @@ graph LR
 | 破损理赔 / 换货 / 投诉 | 强制人工 |
 | 订单不存在 | 强制人工核实 |
 
+## 演示
+
+物流查询：模型自行调用 `query_logistics`，七节点进度以 chip 形式流式展示，回复带政策来源引用。
+
+![物流查询演示](docs/demo-logistics.png)
+
+退款申请：680 元订单命中「> 500 元需主管审批」规则，风控判定转人工并生成工单，模型只负责组织措辞。
+
+![退款转人工演示](docs/demo-refund.png)
+
+> 截图来自本地真实运行（`python -m uvicorn main:app`），非设计稿。
+
 ## 技术栈
 
 FastAPI · LangGraph · LangChain · ChromaDB · OpenAI 兼容 SDK（火山方舟 Ark）· 阿里百炼 Embedding / Rerank · SQLite · SSE
@@ -52,6 +64,7 @@ FastAPI · LangGraph · LangChain · ChromaDB · OpenAI 兼容 SDK（火山方�
 ├── index.html                  # 原生 JS 聊天页（解析 SSE）
 ├── data/
 │   └── shouhouguize.txt        # 售后政策知识库（可替换为 PDF）
+├── docs/                       # README 演示截图
 ├── src/
 │   ├── agent/
 │   │   ├── graph_builder.py    # LangGraph 七节点编排
