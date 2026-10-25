@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>物流售后智能客服 Agent</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Microsoft Yahei", sans-serif; }
+        body { background-color: #f5f7fa; height: 100vh; display: flex; flex-direction: column; }
+        .header {
+            background: linear-gradient(135deg, #2c7be5 0%, #165dba 100%);
+            color: white; padding: 20px; text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .header h1 { font-size: 22px; font-weight: 500; }
+        .header p { font-size: 12px; opacity: .85; margin-top: 6px; }
+        .chat-container {
+            flex: 1; overflow-y: auto; padding: 20px;
+            max-width: 900px; width: 100%; margin: 0 auto; scroll-behavior: smooth;
+        }
+        .message { margin-bottom: 16px; display: flex; }
+        .message.user { justify-content: flex-end; }
+        .msg-bubble {
+            max-width: 78%; padding: 12px 16px; border-radius: 12px;
+            line-height: 1.7; font-size: 15px; word-wrap: break-word; white-space: pre-wrap;
+        }
+        .message.user .msg-bubble {
+            background-color: #2c7be5; color: white; border-bottom-right-radius: 4px;
+        }
+        .message.ai .msg-bubble {
+            background-color: white; color: #333; border-bottom-left-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .stages { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+        .stage-chip {
+            font-size: 11px; color: #165dba; background: #eef5ff;
+            border: 1px solid #d6e6ff; border-radius: 999px; padding: 2px 8px;
+        }
+        .ticket-info {
+            margin-top: 10px; padding: 8px 12px; background: #f0f7ff;
+            border-radius: 6px; font-size: 13px; color: #165dba;
+        }
+        .citations { margin-top: 6px; font-size: 12px; color: #7a8699; }
+        .input-area {
+            max-width: 900px; width: 100%; margin: 0 auto;
+            padding: 16px 20px 24px; display: flex; gap: 10px;
+        }
+        #userInput {
+            flex: 1; padding: 12px 16px; border: 1px solid #dcdfe6;
+            border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s;
+        }
+        #userInput:focus { border-color: #2c7be5; }
+        #sendBtn {
+            padding: 0 28px; background-color: #2c7be5; color: white;
+            border: none; border-radius: 8px; font-size: 15px; cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        #sendBtn:hover { background-color: #165dba; }
+        #sendBtn:disabled { background-color: #90b8ed; cursor: not-allowed; }
+        .tip { text-align: center; color: #909399; font-size: 13px; padding-bottom: 12px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>物流售后智能客服 Agent</h1>
+        <p>LangGraph 七节点工作流 · LLM 自主工具调用 · RAG 政策检索 · 规则风控</p>
+    </div>
+    <div class="chat-container" id="chatContainer">
+        <div class="message ai">
+            <div class="msg-bubble">您好，我是售后智能客服。您可以咨询物流进度、退换货政策、破损理赔等问题，请提供订单号以便我为您精准处理。</div>
+        </div>
+    </div>
+    <div class="tip">可试用：订单DD20260901001物流到哪了 / 我要退款，订单DD20260910003 / 东西破损了怎么理赔</div>
+    <div class="input-area">
+        <input type="text" id="userInput" placeholder="请输入您的售后问题，例如：订单DD20260901001物流到哪了">
+        <button id="sendBtn" onclick="sendMessage()">发送</button>
+    </div>
+
+    <script>
+        const sessionId = 'sess_' + Math.random().toString(36).substring(2, 10);
+        const inputEl = document.getElementById('userInput');
+        const btnEl = document.getElementById('sendBtn');
+        const chatEl = document.getElementById('chatContainer');
+
+        inputEl.addEventListener('keydown', e => {
+            if (e.key === 'Enter' && !btnEl.disabled) sendMessage();
+        });
+
+        const STATUS_MAP = {
+            ai_solved: 'AI 已处理',
+            pending_human: '待人工处理',
+            pending_info: '待补充信息',
+            human_approved: '人工已通过',
+            human_rejected: '人工已驳回',
+            error: '服务异常'
+        };
+
+        function appendUser(text) {
+            const div = document.createElement('div');
+            div.className = 'message user';
+            const bubble = document.createElement('div');
+            bubble.className = 'msg-bubble';
+            bubble.textContent = text;
+            div.appendChild(bubble);
+            chatEl.appendChild(div);
+            chatEl.scrollTop = chatEl.scrollHeight;
+        }
+
+        function createAiBubble() {
+            const div = document.createElement('div');
+            div.className = 'message ai';
+            const wrap = document.createElement('div');
+            wrap.className = 'msg-bubble';
+
+            const stages = document.createElement('div');
+            stages.className = 'stages';
+
+            const text = document.createElement('div');
+            text.textContent = '正在处理...';
+
+            wrap.appendChild(stages);
+            wrap.appendChild(text);
+            div.appendChild(wrap);
+            chatEl.appendChild(div);
+            chatEl.scrollTop = chatEl.scrollHeight;
+            return { wrap, stages, text };
+        }
+
+        function addStage(stagesEl, label, detail) {
+            const chip = document.createElement('span');
+            chip.className = 'stage-chip';
+            chip.textContent = detail ? `${label} · ${detail}` : label;
+            stagesEl.appendChild(chip);
+        }
+
+        async function sendMessage() {
+            const text = inputEl.value.trim();
+            if (!text) return;
+
+            appendUser(text);
+            inputEl.value = '';
+            btnEl.disabled = true;
+            btnEl.innerText = '处理中...';
+
+            const ui = createAiBubble();
+            let fullText = '';
+
+            try {
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ session_id: sessionId, user_input: text })
+                });
+                if (!res.ok) throw new Error('服务响应异常');
+
+                const reader = res.body.getReader();
+                const decoder = new TextDecoder('utf-8');
+                let buffer = '';
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    buffer += decoder.decode(value, { stream: true });
+                    const blocks = buffer.split('\n\n');
+                    buffer = blocks.pop();
+                    for (const block of blocks) {
+                        const line = block.split('\n').find(l => l.startsWith('data: '));
+                        if (!line) continue;
+                        let payload;
+                        try { payload = JSON.parse(line.slice(6)); } catch (e) { continue; }
+                        handleEvent(payload, ui, text => fullText += text);
+                    }
+                }
+
+                if (!fullText) ui.text.textContent = '服务异常，请稍后重试';
+            } catch (e) {
+                ui.wrap.textContent = '服务异常，请稍后重试';
+                console.error('请求错误：', e);
+            } finally {
+                btnEl.disabled = false;
+                btnEl.innerText = '发送';
+                inputEl.focus();
+            }
+        }
+
+        function handleEvent(payload, ui, onToken) {
+            if (payload.type === 'stage') {
+                addStage(ui.stages, payload.label, payload.detail);
+            } else if (payload.type === 'token') {
+                if (ui.text.textContent === '正在处理...') ui.text.textContent = '';
+                ui.text.textContent += payload.content;
+                onToken(payload.content);
+                chatEl.scrollTop = chatEl.scrollHeight;
+            } else if (payload.type === 'done') {
+                if (payload.ticket_id) {
+                    const info = document.createElement('div');
+                    info.className = 'ticket-info';
+                    let line = `工单编号：${payload.ticket_id} | 状态：${STATUS_MAP[payload.status] || payload.status}`;
+                    if (payload.need_human) line += ' | 已转人工客服';
+                    if (payload.elapsed) line += ` | 耗时 ${payload.elapsed}s`;
+                    info.textContent = line;
+                    ui.wrap.appendChild(info);
+                }
+                if (payload.citations && payload.citations.length) {
+                    const cite = document.createElement('div');
+                    cite.className = 'citations';
+                    cite.textContent = '政策来源：' + payload.citations
+                        .map(c => `${c.source}#${c.chunk_index}`).join('、');
+                    ui.wrap.appendChild(cite);
+                }
+                chatEl.scrollTop = chatEl.scrollHeight;
+            }
+        }
+
+        inputEl.focus();
+    </script>
+</body>
+</html>

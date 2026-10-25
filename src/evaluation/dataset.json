@@ -1,0 +1,222 @@
+[
+  {
+    "id": "L01",
+    "input": "订单DD20260901001物流到哪了",
+    "expect_type": "query_logistics",
+    "expect_missing": [],
+    "expect_status": "ai_solved",
+    "expect_human": false,
+    "expect_faq": false,
+    "expect_tools": true,
+    "note": "标准物流查询"
+  },
+  {
+    "id": "L02",
+    "input": "帮我查下DD20260905002的快递到哪了",
+    "expect_type": "query_logistics",
+    "expect_missing": [],
+    "expect_status": "ai_solved",
+    "expect_human": false,
+    "expect_faq": false,
+    "expect_tools": true,
+    "note": "口语化物流查询"
+  },
+  {
+    "id": "L03",
+    "input": "DD20260910003什么时候能到",
+    "expect_type": "query_logistics",
+    "expect_missing": [],
+    "expect_status": "ai_solved",
+    "expect_human": false,
+    "expect_faq": false,
+    "expect_tools": true,
+    "note": "只有订单号+时效询问"
+  },
+  {
+    "id": "R01",
+    "input": "我要退款，订单DD20260910004",
+    "expect_type": "refund",
+    "expect_missing": [],
+    "expect_status": "ai_solved",
+    "expect_human": false,
+    "expect_faq": false,
+    "expect_tools": true,
+    "note": "39 元，≤50 自动退款"
+  },
+  {
+    "id": "R02",
+    "input": "订单DD20260905002申请退款",
+    "expect_type": "refund",
+    "expect_missing": [],
+    "expect_status": "pending_human",
+    "expect_human": true,
+    "expect_faq": false,
+    "expect_tools": true,
+    "note": "299 元，落在 50-500 人工区间"
+  },
+  {
+    "id": "R03",
+    "input": "订单DD20260910003退款",
+    "expect_type": "refund",
+    "expect_missing": [],
+    "expect_status": "pending_human",
+    "expect_human": true,
+    "expect_faq": false,
+    "expect_tools": true,
+    "note": "680 元，>500 需主管审批"
+  },
+  {
+    "id": "R04",
+    "input": "我要退货，订单DD20260901001",
+    "expect_type": "refund",
+    "expect_missing": [],
+    "expect_status": "pending_human",
+    "expect_human": true,
+    "expect_faq": false,
+    "expect_tools": true,
+    "note": "129 元，需人工审核"
+  },
+  {
+    "id": "R05",
+    "input": "订单DD99999999999要退款",
+    "expect_type": "refund",
+    "expect_missing": [],
+    "expect_status": "pending_human",
+    "expect_human": true,
+    "expect_faq": false,
+    "expect_tools": true,
+    "note": "订单不存在，必须转人工核实"
+  },
+  {
+    "id": "E01",
+    "input": "我要换货，订单DD20260905002",
+    "expect_type": "exchange",
+    "expect_missing": [],
+    "expect_status": "pending_human",
+    "expect_human": true,
+    "expect_faq": false,
+    "expect_tools": true,
+    "note": "换货需人工核验商品状态"
+  },
+  {
+    "id": "E02",
+    "input": "这个键盘我想换一个，订单DD20260905002",
+    "expect_type": "exchange",
+    "expect_missing": [],
+    "expect_status": "pending_human",
+    "expect_human": true,
+    "expect_faq": false,
+    "expect_tools": true,
+    "note": "口语化换货诉求"
+  },
+  {
+    "id": "D01",
+    "input": "订单DD20260901001东西破损了，要理赔",
+    "expect_type": "damage_claim",
+    "expect_missing": [],
+    "expect_status": "pending_human",
+    "expect_human": true,
+    "expect_faq": false,
+    "expect_tools": true,
+    "note": "破损理赔需核验凭证"
+  },
+  {
+    "id": "D02",
+    "input": "收到的耳机少件了，订单DD20260901001",
+    "expect_type": "damage_claim",
+    "expect_missing": [],
+    "expect_status": "pending_human",
+    "expect_human": true,
+    "expect_faq": false,
+    "expect_tools": true,
+    "note": "少件/漏发属于商家责任"
+  },
+  {
+    "id": "D03",
+    "input": "订单DD20260905002商品损坏，要求补发",
+    "expect_type": "damage_claim",
+    "expect_missing": [],
+    "expect_status": "pending_human",
+    "expect_human": true,
+    "expect_faq": false,
+    "expect_tools": true,
+    "note": "损坏+补发诉求"
+  },
+  {
+    "id": "C01",
+    "input": "我要投诉，客服态度太差",
+    "expect_type": "complaint",
+    "expect_missing": [],
+    "expect_status": "pending_human",
+    "expect_human": true,
+    "expect_faq": false,
+    "expect_tools": false,
+    "note": "投诉类必须人工介入，且无需订单"
+  },
+  {
+    "id": "C02",
+    "input": "你们客服一直不回复我，我要投诉",
+    "expect_type": "complaint",
+    "expect_missing": [],
+    "expect_status": "pending_human",
+    "expect_human": true,
+    "expect_faq": false,
+    "expect_tools": false,
+    "note": "情绪化投诉，无需订单号"
+  },
+  {
+    "id": "M01",
+    "input": "我要退款",
+    "expect_type": "refund",
+    "expect_missing": ["订单号"],
+    "expect_status": "pending_info",
+    "expect_human": false,
+    "expect_faq": false,
+    "expect_tools": false,
+    "note": "缺订单号，应追问"
+  },
+  {
+    "id": "M02",
+    "input": "订单破损了要理赔",
+    "expect_type": "damage_claim",
+    "expect_missing": ["订单号"],
+    "expect_status": "pending_info",
+    "expect_human": false,
+    "expect_faq": false,
+    "expect_tools": false,
+    "note": "缺订单号，应追问"
+  },
+  {
+    "id": "M03",
+    "input": "订单DD20260901001我要部分退款，退其中一个商品",
+    "expect_type": "refund",
+    "expect_missing": ["商品编号"],
+    "expect_status": "pending_info",
+    "expect_human": false,
+    "expect_faq": false,
+    "expect_tools": false,
+    "note": "部分退款缺商品编号，应追问"
+  },
+  {
+    "id": "F01",
+    "input": "退货运费谁承担",
+    "expect_type": null,
+    "expect_missing": [],
+    "expect_status": "ai_solved",
+    "expect_human": false,
+    "expect_faq": true,
+    "expect_tools": false,
+    "note": "纯政策咨询走 FAQ 短路"
+  },
+  {
+    "id": "F02",
+    "input": "你们客服工作时间是几点",
+    "expect_type": null,
+    "expect_missing": [],
+    "expect_status": "ai_solved",
+    "expect_human": false,
+    "expect_faq": true,
+    "expect_tools": false,
+    "note": "FAQ 短路"
+  }
+]
