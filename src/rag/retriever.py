@@ -11,7 +11,7 @@ from src.config import config
 from src.rag.ingest import collection
 from src.utils import logger
 
-EMBED_TIMEOUT = 4
+EMBED_TIMEOUT = 8
 RERANK_TIMEOUT = 6
 COOLDOWN_SECONDS = 60
 
