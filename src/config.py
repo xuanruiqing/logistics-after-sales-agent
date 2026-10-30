@@ -24,6 +24,23 @@ class Config:
     SIMILAR_THRESHOLD = float(os.getenv("SIMILAR_THRESHOLD", 0.2))
     DEBUG_SIMILARITY = os.getenv("DEBUG_SIMILARITY", "False") == "True"
 
+    # ========== 检索依赖治理 ==========
+    EMBED_CONNECT_TIMEOUT = float(os.getenv("EMBED_CONNECT_TIMEOUT", 3.0))
+    EMBED_TIMEOUT = float(os.getenv("EMBED_TIMEOUT", 8.0))
+    RERANK_TIMEOUT = float(os.getenv("RERANK_TIMEOUT", 6.0))
+    RETRIEVAL_COOLDOWN = float(os.getenv("RETRIEVAL_COOLDOWN", 60.0))
+    # 同时进行的外部长耗时调用上限：超出后直接走本地降级，避免请求排队等超时
+    EMBED_MAX_CONCURRENCY = int(os.getenv("EMBED_MAX_CONCURRENCY", 4))
+    RETRIEVAL_CACHE_SIZE = int(os.getenv("RETRIEVAL_CACHE_SIZE", 256))
+    RETRIEVAL_CACHE_TTL = float(os.getenv("RETRIEVAL_CACHE_TTL", 300.0))
+    CORPUS_CACHE_TTL = float(os.getenv("CORPUS_CACHE_TTL", 600.0))
+
+    # ========== 线程池与连接池 ==========
+    DB_EXECUTOR_WORKERS = int(os.getenv("DB_EXECUTOR_WORKERS", 4))
+    IO_EXECUTOR_WORKERS = int(os.getenv("IO_EXECUTOR_WORKERS", 8))
+    LLM_MAX_CONNECTIONS = int(os.getenv("LLM_MAX_CONNECTIONS", 32))
+    SQLITE_BUSY_TIMEOUT = float(os.getenv("SQLITE_BUSY_TIMEOUT", 5.0))
+
     # ========== Agent 循环 ==========
     MAX_AGENT_STEPS = int(os.getenv("MAX_AGENT_STEPS", 4))
 

@@ -9,3 +9,5 @@ python-dotenv==1.2.4
 openai==3.23.0
 dashscope==1.27.7
 requests==2.34.2
+httpx==0.28.1
+psutil==7.0.0

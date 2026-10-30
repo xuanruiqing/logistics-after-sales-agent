@@ -2,7 +2,7 @@ import time
 from typing import Any, Dict, List
 
 from src.agent.policy import policy_engine
-from src.db.database import get_logistics, get_order
+from src.db.database import get_logistics, get_order, run_blocking
 from src.utils import logger
 
 # ===== 工具定义（OpenAI function calling schema）=====
@@ -78,16 +78,21 @@ def _check_refund_eligibility(order_no: str, request_type: str) -> Dict[str, Any
 
 
 async def execute_tool(name: str, args: Dict[str, Any]) -> Dict[str, Any]:
-    """执行工具并记录耗时。任何异常都转成结构化结果，避免中断 Agent 循环。"""
+    """执行工具并记录耗时。任何异常都转成结构化结果，避免中断 Agent 循环。
+
+    SQLite 读取放到数据库线程池，避免在高并发下阻塞事件循环。
+    """
     start = time.time()
     try:
         if name == "query_order":
-            data = _query_order(str(args.get("order_no", "")))
+            data = await run_blocking(_query_order, str(args.get("order_no", "")))
         elif name == "query_logistics":
-            data = _query_logistics(str(args.get("order_no", "")))
+            data = await run_blocking(_query_logistics, str(args.get("order_no", "")))
         elif name == "check_refund_eligibility":
-            data = _check_refund_eligibility(
-                str(args.get("order_no", "")), str(args.get("request_type", "other"))
+            data = await run_blocking(
+                _check_refund_eligibility,
+                str(args.get("order_no", "")),
+                str(args.get("request_type", "other")),
             )
         else:
             data = {"error": f"未知工具: {name}"}

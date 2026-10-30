@@ -4,6 +4,8 @@
 # 向量库与本地数据库
 chroma_db/
 *.db
+*.db-shm
+*.db-wal
 *.sqlite
 *.sqlite3
 

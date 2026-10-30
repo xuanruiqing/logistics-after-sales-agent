@@ -10,12 +10,14 @@ class AfterSalesState(TypedDict, total=False):
 
     # ===== 意图与抽取 =====
     request_type: str
+    analysis: Optional[Dict[str, Any]]
     extract_result: Dict[str, Any]
     info_is_complete: bool
     ask_user_prompt: Optional[str]
 
     # ===== 检索 =====
     policy_docs: List[Dict[str, Any]]
+    retrieval_meta: Dict[str, Any]
 
     # ===== 工具调用（由模型自主决定）=====
     tool_calls: List[Dict[str, Any]]

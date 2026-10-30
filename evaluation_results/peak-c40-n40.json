@@ -1,0 +1,2901 @@
+{
+  "run_id": "load-20261030-160340-4b4b5a",
+  "started_at": "2026-10-30T16:03:40.888180+08:00",
+  "ended_at": "2026-10-30T16:03:58.906054+08:00",
+  "elapsed_s": 17.9747,
+  "config": {
+    "mode": "load",
+    "base_url": "http://127.0.0.1:8000",
+    "port": 8000,
+    "pid": 0,
+    "repeat": 20,
+    "requests": 40,
+    "concurrency": 40,
+    "duration": 1800,
+    "rate": 0.1,
+    "timeout": 180,
+    "sample_interval": 1.0,
+    "output": "evaluation_results/peak-c40-n40.json"
+  },
+  "environment": {
+    "python": "3.13.9",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "cpu_logical": 16,
+    "cpu_physical": 8,
+    "memory_total_bytes": 16368504832,
+    "benchmark_packages": {
+      "httpx": "0.28.1",
+      "psutil": "5.9.0"
+    },
+    "server_process": {
+      "pid": 15396,
+      "ppid": 23184,
+      "cmdline": [
+        "D:\\AI-Project\\Project2_logistics_agent\\.venv\\Scripts\\python.exe",
+        "main.py"
+      ],
+      "cwd": "D:\\AI-Project\\Project2_logistics_agent",
+      "create_time": "2026-10-30T15:03:03.933604+08:00"
+    }
+  },
+  "run_error": null,
+  "summary": {
+    "overall": {
+      "requests": 40,
+      "http_success_rate": 1.0,
+      "business_success_rate": 1.0,
+      "http_error_rate": 0.0,
+      "business_error_rate": 0.0,
+      "throughput_rps": 2.2254,
+      "e2e": {
+        "n": 40,
+        "mean_s": 8.9073,
+        "p50_s": 3.4416,
+        "p95_s": 17.6751,
+        "p99_s": 17.9125,
+        "min_s": 0.3598,
+        "max_s": 17.9125
+      },
+      "ttfb": {
+        "n": 40,
+        "mean_s": 0.8299,
+        "p50_s": 1.0468,
+        "p95_s": 1.1617,
+        "p99_s": 1.1634,
+        "min_s": 0.182,
+        "max_s": 1.1634
+      },
+      "first_token": {
+        "n": 40,
+        "mean_s": 7.6326,
+        "p50_s": 3.4409,
+        "p95_s": 14.6496,
+        "p99_s": 15.1125,
+        "min_s": 0.3593,
+        "max_s": 15.1125
+      },
+      "server_elapsed": {
+        "n": 40,
+        "mean_s": 8.3253,
+        "p50_s": 3.16,
+        "p95_s": 17.06,
+        "p99_s": 17.59,
+        "min_s": 0.07,
+        "max_s": 17.59
+      }
+    },
+    "by_scenario": {
+      "faq": {
+        "requests": 10,
+        "http_success_rate": 1.0,
+        "business_success_rate": 1.0,
+        "http_error_rate": 0.0,
+        "business_error_rate": 0.0,
+        "throughput_rps": 0.5563,
+        "e2e": {
+          "n": 10,
+          "mean_s": 0.9863,
+          "p50_s": 1.175,
+          "p95_s": 1.1852,
+          "p99_s": 1.1852,
+          "min_s": 0.3598,
+          "max_s": 1.1852
+        },
+        "ttfb": {
+          "n": 10,
+          "mean_s": 0.7613,
+          "p50_s": 1.0289,
+          "p95_s": 1.1413,
+          "p99_s": 1.1413,
+          "min_s": 0.1822,
+          "max_s": 1.1413
+        },
+        "first_token": {
+          "n": 10,
+          "mean_s": 0.9858,
+          "p50_s": 1.1743,
+          "p95_s": 1.1847,
+          "p99_s": 1.1847,
+          "min_s": 0.3593,
+          "max_s": 1.1847
+        },
+        "server_elapsed": {
+          "n": 10,
+          "mean_s": 0.289,
+          "p50_s": 0.24,
+          "p95_s": 0.58,
+          "p99_s": 0.58,
+          "min_s": 0.07,
+          "max_s": 0.58
+        }
+      },
+      "logistics": {
+        "requests": 10,
+        "http_success_rate": 1.0,
+        "business_success_rate": 1.0,
+        "http_error_rate": 0.0,
+        "business_error_rate": 0.0,
+        "throughput_rps": 0.5563,
+        "e2e": {
+          "n": 10,
+          "mean_s": 15.591,
+          "p50_s": 16.0284,
+          "p95_s": 17.5729,
+          "p99_s": 17.5729,
+          "min_s": 9.8655,
+          "max_s": 17.5729
+        },
+        "ttfb": {
+          "n": 10,
+          "mean_s": 0.8413,
+          "p50_s": 1.0447,
+          "p95_s": 1.1617,
+          "p99_s": 1.1617,
+          "min_s": 0.182,
+          "max_s": 1.1617
+        },
+        "first_token": {
+          "n": 10,
+          "mean_s": 13.2579,
+          "p50_s": 13.9275,
+          "p95_s": 14.7944,
+          "p99_s": 14.7944,
+          "min_s": 7.2868,
+          "max_s": 14.7944
+        },
+        "server_elapsed": {
+          "n": 10,
+          "mean_s": 15.073,
+          "p50_s": 15.69,
+          "p95_s": 16.81,
+          "p99_s": 16.81,
+          "min_s": 9.72,
+          "max_s": 16.81
+        }
+      },
+      "pending_info": {
+        "requests": 10,
+        "http_success_rate": 1.0,
+        "business_success_rate": 1.0,
+        "http_error_rate": 0.0,
+        "business_error_rate": 0.0,
+        "throughput_rps": 0.5563,
+        "e2e": {
+          "n": 10,
+          "mean_s": 3.0673,
+          "p50_s": 3.0034,
+          "p95_s": 3.4416,
+          "p99_s": 3.4416,
+          "min_s": 2.7753,
+          "max_s": 3.4416
+        },
+        "ttfb": {
+          "n": 10,
+          "mean_s": 0.8588,
+          "p50_s": 1.0468,
+          "p95_s": 1.1634,
+          "p99_s": 1.1634,
+          "min_s": 0.1836,
+          "max_s": 1.1634
+        },
+        "first_token": {
+          "n": 10,
+          "mean_s": 3.0665,
+          "p50_s": 3.0021,
+          "p95_s": 3.4409,
+          "p99_s": 3.4409,
+          "min_s": 2.7745,
+          "max_s": 3.4409
+        },
+        "server_elapsed": {
+          "n": 10,
+          "mean_s": 2.5,
+          "p50_s": 2.38,
+          "p95_s": 3.16,
+          "p99_s": 3.16,
+          "min_s": 1.87,
+          "max_s": 3.16
+        }
+      },
+      "refund_high": {
+        "requests": 10,
+        "http_success_rate": 1.0,
+        "business_success_rate": 1.0,
+        "http_error_rate": 0.0,
+        "business_error_rate": 0.0,
+        "throughput_rps": 0.5563,
+        "e2e": {
+          "n": 10,
+          "mean_s": 15.9846,
+          "p50_s": 16.7526,
+          "p95_s": 17.9125,
+          "p99_s": 17.9125,
+          "min_s": 7.9463,
+          "max_s": 17.9125
+        },
+        "ttfb": {
+          "n": 10,
+          "mean_s": 0.8581,
+          "p50_s": 1.046,
+          "p95_s": 1.1633,
+          "p99_s": 1.1633,
+          "min_s": 0.1828,
+          "max_s": 1.1633
+        },
+        "first_token": {
+          "n": 10,
+          "mean_s": 13.2204,
+          "p50_s": 14.0188,
+          "p95_s": 15.1125,
+          "p99_s": 15.1125,
+          "min_s": 5.1915,
+          "max_s": 15.1125
+        },
+        "server_elapsed": {
+          "n": 10,
+          "mean_s": 15.439,
+          "p50_s": 16.24,
+          "p95_s": 17.59,
+          "p99_s": 17.59,
+          "min_s": 6.98,
+          "max_s": 17.59
+        }
+      }
+    },
+    "stage_latency": {
+      "faq": {
+        "n": 10,
+        "mean_s": 0.9858,
+        "p50_s": 1.1742,
+        "p95_s": 1.1847,
+        "p99_s": 1.1847,
+        "min_s": 0.3592,
+        "max_s": 1.1847
+      },
+      "info_extract": {
+        "n": 30,
+        "mean_s": 1.2325,
+        "p50_s": 1.2235,
+        "p95_s": 1.52,
+        "p99_s": 1.9405,
+        "min_s": 0.8075,
+        "max_s": 1.9405
+      },
+      "knowledge_retrieve": {
+        "n": 20,
+        "mean_s": 7.1607,
+        "p50_s": 8.0102,
+        "p95_s": 8.033,
+        "p99_s": 8.0513,
+        "min_s": 0.3533,
+        "max_s": 8.0513
+      },
+      "policy_check": {
+        "n": 20,
+        "mean_s": 0.0037,
+        "p50_s": 0.004,
+        "p95_s": 0.0054,
+        "p99_s": 0.0061,
+        "min_s": 0.0,
+        "max_s": 0.0061
+      },
+      "post_graph_or_faq_finalize": {
+        "n": 40,
+        "mean_s": 1.9753,
+        "p50_s": 0.0304,
+        "p95_s": 4.7958,
+        "p99_s": 5.3001,
+        "min_s": 0.0002,
+        "max_s": 5.3001
+      },
+      "prepare_reply": {
+        "n": 20,
+        "mean_s": 0.0044,
+        "p50_s": 0.0006,
+        "p95_s": 0.0189,
+        "p99_s": 0.0344,
+        "min_s": 0.0004,
+        "max_s": 0.0344
+      },
+      "router": {
+        "n": 30,
+        "mean_s": 2.0139,
+        "p50_s": 1.9477,
+        "p95_s": 2.2817,
+        "p99_s": 2.7352,
+        "min_s": 1.838,
+        "max_s": 2.7352
+      },
+      "ticket_generate": {
+        "n": 20,
+        "mean_s": 0.0191,
+        "p50_s": 0.0182,
+        "p95_s": 0.0272,
+        "p99_s": 0.0291,
+        "min_s": 0.0046,
+        "max_s": 0.0291
+      },
+      "tool_agent": {
+        "n": 20,
+        "mean_s": 1.3136,
+        "p50_s": 1.1683,
+        "p95_s": 1.8242,
+        "p99_s": 2.0769,
+        "min_s": 0.9464,
+        "max_s": 2.0769
+      }
+    },
+    "final_llm_ttft": {
+      "n": 20,
+      "mean_s": 1.3911,
+      "p50_s": 1.3241,
+      "p95_s": 2.2123,
+      "p99_s": 2.5837,
+      "min_s": 0.7396,
+      "max_s": 2.5837
+    },
+    "final_stream_and_finalize": {
+      "n": 20,
+      "mean_s": 2.5486,
+      "p50_s": 2.4962,
+      "p95_s": 3.2629,
+      "p99_s": 3.3693,
+      "min_s": 1.9869,
+      "max_s": 3.3693
+    }
+  },
+  "resource_summary": {
+    "samples": 19,
+    "process_cpu_percent": {
+      "mean": 15.2579,
+      "p95": 47.8,
+      "max": 47.8
+    },
+    "system_cpu_percent": {
+      "mean": 21.3789,
+      "p95": 31.2,
+      "max": 31.2
+    },
+    "process_rss_bytes": {
+      "start": 100560896,
+      "end": 121552896,
+      "min": 100560896,
+      "max": 121614336,
+      "mean": 117897971,
+      "linear_slope_kib_per_min": 53327.0806
+    },
+    "system_memory_percent": {
+      "mean": 66.9105,
+      "p95": 68.0,
+      "max": 68.0
+    },
+    "threads": {
+      "mean": 80.3684,
+      "p95": 86,
+      "max": 86
+    },
+    "handles": {
+      "mean": 587.5789,
+      "p95": 636,
+      "max": 636
+    },
+    "process_read_bps": {
+      "mean": 831084.3374,
+      "p95": 8445784.6209,
+      "max": 8445784.6209
+    },
+    "process_write_bps": {
+      "mean": 148183.3125,
+      "p95": 1043254.1856,
+      "max": 1043254.1856
+    },
+    "system_disk_read_bps": {
+      "mean": 92278.2037,
+      "p95": 1237540.8488,
+      "max": 1237540.8488
+    },
+    "system_disk_write_bps": {
+      "mean": 2447789.0215,
+      "p95": 14927211.9346,
+      "max": 14927211.9346
+    },
+    "system_net_sent_bps": {
+      "mean": 134980.8808,
+      "p95": 193975.4094,
+      "max": 193975.4094
+    },
+    "system_net_recv_bps": {
+      "mean": 92765.7784,
+      "p95": 317631.4767,
+      "max": 317631.4767
+    }
+  },
+  "requests": [
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "faq",
+      "request_index": 0,
+      "started_at": "2026-10-30T16:03:40.923205+08:00",
+      "e2e_s": 0.3754,
+      "ttfb_s": 0.1822,
+      "first_token_s": 0.3748,
+      "server_elapsed_s": 0.15,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "ai_solved",
+      "source": "faq",
+      "ticket_id": null,
+      "need_human": false,
+      "tools": [],
+      "stage_events": [
+        {
+          "node": "faq",
+          "offset_s": 0.3747,
+          "detail": "跳过 Agent 链路"
+        }
+      ],
+      "stage_durations": {
+        "faq": 0.3747,
+        "post_graph_or_faq_finalize": 0.0007
+      },
+      "final_llm_ttft_s": null,
+      "final_stream_and_finalize_s": null,
+      "answer_chars": 44,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "logistics",
+      "request_index": 1,
+      "started_at": "2026-10-30T16:03:40.941591+08:00",
+      "e2e_s": 15.7465,
+      "ttfb_s": 0.182,
+      "first_token_s": 13.2945,
+      "server_elapsed_s": 15.69,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "ai_solved",
+      "source": null,
+      "ticket_id": "TK13DD076CFA",
+      "need_human": false,
+      "tools": [
+        "query_logistics"
+      ],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 1.838,
+          "detail": "query_logistics"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.0482,
+          "detail": "信息完整"
+        },
+        {
+          "node": "knowledge_retrieve",
+          "offset_s": 11.0761,
+          "detail": "召回 1 条政策"
+        },
+        {
+          "node": "tool_agent",
+          "offset_s": 12.3609,
+          "detail": "query_logistics"
+        },
+        {
+          "node": "policy_check",
+          "offset_s": 12.3654,
+          "detail": "风险 low，自动处理"
+        },
+        {
+          "node": "ticket_generate",
+          "offset_s": 12.3824,
+          "detail": "TK13DD076CFA"
+        },
+        {
+          "node": "prepare_reply",
+          "offset_s": 12.383,
+          "detail": ""
+        }
+      ],
+      "stage_durations": {
+        "router": 1.838,
+        "info_extract": 1.2102,
+        "knowledge_retrieve": 8.0279,
+        "tool_agent": 1.2848,
+        "policy_check": 0.0045,
+        "ticket_generate": 0.017,
+        "prepare_reply": 0.0006,
+        "post_graph_or_faq_finalize": 3.3635
+      },
+      "final_llm_ttft_s": 0.9115,
+      "final_stream_and_finalize_s": 2.452,
+      "answer_chars": 213,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "refund_high",
+      "request_index": 2,
+      "started_at": "2026-10-30T16:03:40.941962+08:00",
+      "e2e_s": 16.8382,
+      "ttfb_s": 0.1828,
+      "first_token_s": 14.233,
+      "server_elapsed_s": 16.76,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "pending_human",
+      "source": null,
+      "ticket_id": "TKEEC8BAEE60",
+      "need_human": true,
+      "tools": [
+        "query_order"
+      ],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 2.2817,
+          "detail": "refund"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.6247,
+          "detail": "信息完整"
+        },
+        {
+          "node": "knowledge_retrieve",
+          "offset_s": 11.6456,
+          "detail": "召回 2 条政策"
+        },
+        {
+          "node": "tool_agent",
+          "offset_s": 13.4698,
+          "detail": "query_order"
+        },
+        {
+          "node": "policy_check",
+          "offset_s": 13.4728,
+          "detail": "风险 high，转人工"
+        },
+        {
+          "node": "ticket_generate",
+          "offset_s": 13.493,
+          "detail": "TKEEC8BAEE60"
+        },
+        {
+          "node": "prepare_reply",
+          "offset_s": 13.4934,
+          "detail": ""
+        }
+      ],
+      "stage_durations": {
+        "router": 2.2817,
+        "info_extract": 1.343,
+        "knowledge_retrieve": 8.0209,
+        "tool_agent": 1.8242,
+        "policy_check": 0.003,
+        "ticket_generate": 0.0202,
+        "prepare_reply": 0.0004,
+        "post_graph_or_faq_finalize": 3.3448
+      },
+      "final_llm_ttft_s": 0.7396,
+      "final_stream_and_finalize_s": 2.6052,
+      "answer_chars": 187,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "pending_info",
+      "request_index": 3,
+      "started_at": "2026-10-30T16:03:40.942149+08:00",
+      "e2e_s": 2.9267,
+      "ttfb_s": 0.1836,
+      "first_token_s": 2.9259,
+      "server_elapsed_s": 2.83,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "pending_info",
+      "source": null,
+      "ticket_id": null,
+      "need_human": false,
+      "tools": [],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 1.9335,
+          "detail": "refund"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 2.9055,
+          "detail": "缺失：订单号"
+        }
+      ],
+      "stage_durations": {
+        "router": 1.9335,
+        "info_extract": 0.972,
+        "post_graph_or_faq_finalize": 0.0212
+      },
+      "final_llm_ttft_s": null,
+      "final_stream_and_finalize_s": null,
+      "answer_chars": 11,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "faq",
+      "request_index": 4,
+      "started_at": "2026-10-30T16:03:40.942319+08:00",
+      "e2e_s": 0.3598,
+      "ttfb_s": 0.1841,
+      "first_token_s": 0.3593,
+      "server_elapsed_s": 0.08,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "ai_solved",
+      "source": "faq",
+      "ticket_id": null,
+      "need_human": false,
+      "tools": [],
+      "stage_events": [
+        {
+          "node": "faq",
+          "offset_s": 0.3592,
+          "detail": "跳过 Agent 链路"
+        }
+      ],
+      "stage_durations": {
+        "faq": 0.3592,
+        "post_graph_or_faq_finalize": 0.0006
+      },
+      "final_llm_ttft_s": null,
+      "final_stream_and_finalize_s": null,
+      "answer_chars": 44,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "logistics",
+      "request_index": 5,
+      "started_at": "2026-10-30T16:03:40.942498+08:00",
+      "e2e_s": 9.8655,
+      "ttfb_s": 0.2038,
+      "first_token_s": 7.2868,
+      "server_elapsed_s": 9.72,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "ai_solved",
+      "source": null,
+      "ticket_id": "TKF292B4BCE6",
+      "need_human": false,
+      "tools": [
+        "query_logistics"
+      ],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 1.8611,
+          "detail": "query_logistics"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.2903,
+          "detail": "信息完整"
+        },
+        {
+          "node": "knowledge_retrieve",
+          "offset_s": 3.6619,
+          "detail": "召回 2 条政策"
+        },
+        {
+          "node": "tool_agent",
+          "offset_s": 4.6803,
+          "detail": "query_logistics"
+        },
+        {
+          "node": "policy_check",
+          "offset_s": 4.6848,
+          "detail": "风险 low，自动处理"
+        },
+        {
+          "node": "ticket_generate",
+          "offset_s": 4.7025,
+          "detail": "TKF292B4BCE6"
+        },
+        {
+          "node": "prepare_reply",
+          "offset_s": 4.7031,
+          "detail": ""
+        }
+      ],
+      "stage_durations": {
+        "router": 1.8611,
+        "info_extract": 1.4292,
+        "knowledge_retrieve": 0.3716,
+        "tool_agent": 1.0184,
+        "policy_check": 0.0045,
+        "ticket_generate": 0.0177,
+        "prepare_reply": 0.0006,
+        "post_graph_or_faq_finalize": 5.1624
+      },
+      "final_llm_ttft_s": 2.5837,
+      "final_stream_and_finalize_s": 2.5787,
+      "answer_chars": 187,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "refund_high",
+      "request_index": 6,
+      "started_at": "2026-10-30T16:03:40.942663+08:00",
+      "e2e_s": 17.7989,
+      "ttfb_s": 0.3603,
+      "first_token_s": 15.1125,
+      "server_elapsed_s": 17.59,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "pending_human",
+      "source": null,
+      "ticket_id": "TK62822CB1CA",
+      "need_human": true,
+      "tools": [
+        "query_order"
+      ],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 2.7352,
+          "detail": "refund"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 4.1811,
+          "detail": "信息完整"
+        },
+        {
+          "node": "knowledge_retrieve",
+          "offset_s": 12.1879,
+          "detail": "召回 2 条政策"
+        },
+        {
+          "node": "tool_agent",
+          "offset_s": 13.2645,
+          "detail": "query_order"
+        },
+        {
+          "node": "policy_check",
+          "offset_s": 13.2684,
+          "detail": "风险 high，转人工"
+        },
+        {
+          "node": "ticket_generate",
+          "offset_s": 13.2877,
+          "detail": "TK62822CB1CA"
+        },
+        {
+          "node": "prepare_reply",
+          "offset_s": 13.289,
+          "detail": ""
+        }
+      ],
+      "stage_durations": {
+        "router": 2.7352,
+        "info_extract": 1.4459,
+        "knowledge_retrieve": 8.0068,
+        "tool_agent": 1.0766,
+        "policy_check": 0.0039,
+        "ticket_generate": 0.0193,
+        "prepare_reply": 0.0013,
+        "post_graph_or_faq_finalize": 4.5099
+      },
+      "final_llm_ttft_s": 1.8235,
+      "final_stream_and_finalize_s": 2.6864,
+      "answer_chars": 205,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "pending_info",
+      "request_index": 7,
+      "started_at": "2026-10-30T16:03:40.942823+08:00",
+      "e2e_s": 3.3899,
+      "ttfb_s": 0.3611,
+      "first_token_s": 3.3892,
+      "server_elapsed_s": 3.16,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "pending_info",
+      "source": null,
+      "ticket_id": null,
+      "need_human": false,
+      "tools": [],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 2.0627,
+          "detail": "refund"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.3697,
+          "detail": "缺失：订单号"
+        }
+      ],
+      "stage_durations": {
+        "router": 2.0627,
+        "info_extract": 1.307,
+        "post_graph_or_faq_finalize": 0.0202
+      },
+      "final_llm_ttft_s": null,
+      "final_stream_and_finalize_s": null,
+      "answer_chars": 11,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "faq",
+      "request_index": 8,
+      "started_at": "2026-10-30T16:03:40.942986+08:00",
+      "e2e_s": 1.0252,
+      "ttfb_s": 0.3617,
+      "first_token_s": 1.0247,
+      "server_elapsed_s": 0.14,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "ai_solved",
+      "source": "faq",
+      "ticket_id": null,
+      "need_human": false,
+      "tools": [],
+      "stage_events": [
+        {
+          "node": "faq",
+          "offset_s": 1.0246,
+          "detail": "跳过 Agent 链路"
+        }
+      ],
+      "stage_durations": {
+        "faq": 1.0246,
+        "post_graph_or_faq_finalize": 0.0006
+      },
+      "final_llm_ttft_s": null,
+      "final_stream_and_finalize_s": null,
+      "answer_chars": 44,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "logistics",
+      "request_index": 9,
+      "started_at": "2026-10-30T16:03:40.943148+08:00",
+      "e2e_s": 16.0284,
+      "ttfb_s": 0.384,
+      "first_token_s": 13.9275,
+      "server_elapsed_s": 15.76,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "ai_solved",
+      "source": null,
+      "ticket_id": "TK9BB13E8B29",
+      "need_human": false,
+      "tools": [
+        "query_logistics"
+      ],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 2.1653,
+          "detail": "query_logistics"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.3981,
+          "detail": "信息完整"
+        },
+        {
+          "node": "knowledge_retrieve",
+          "offset_s": 11.4494,
+          "detail": "召回 1 条政策"
+        },
+        {
+          "node": "tool_agent",
+          "offset_s": 13.0836,
+          "detail": "query_logistics"
+        },
+        {
+          "node": "policy_check",
+          "offset_s": 13.0879,
+          "detail": "风险 low，自动处理"
+        },
+        {
+          "node": "ticket_generate",
+          "offset_s": 13.1061,
+          "detail": "TK9BB13E8B29"
+        },
+        {
+          "node": "prepare_reply",
+          "offset_s": 13.1067,
+          "detail": ""
+        }
+      ],
+      "stage_durations": {
+        "router": 2.1653,
+        "info_extract": 1.2328,
+        "knowledge_retrieve": 8.0513,
+        "tool_agent": 1.6342,
+        "policy_check": 0.0043,
+        "ticket_generate": 0.0182,
+        "prepare_reply": 0.0006,
+        "post_graph_or_faq_finalize": 2.9217
+      },
+      "final_llm_ttft_s": 0.8208,
+      "final_stream_and_finalize_s": 2.1009,
+      "answer_chars": 211,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "refund_high",
+      "request_index": 10,
+      "started_at": "2026-10-30T16:03:40.943307+08:00",
+      "e2e_s": 15.8367,
+      "ttfb_s": 0.3851,
+      "first_token_s": 13.8473,
+      "server_elapsed_s": 15.54,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "pending_human",
+      "source": null,
+      "ticket_id": "TKF0455D2C71",
+      "need_human": true,
+      "tools": [
+        "query_order"
+      ],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 1.9594,
+          "detail": "refund"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.2982,
+          "detail": "信息完整"
+        },
+        {
+          "node": "knowledge_retrieve",
+          "offset_s": 11.3178,
+          "detail": "召回 2 条政策"
+        },
+        {
+          "node": "tool_agent",
+          "offset_s": 12.5207,
+          "detail": "query_order"
+        },
+        {
+          "node": "policy_check",
+          "offset_s": 12.5268,
+          "detail": "风险 high，转人工"
+        },
+        {
+          "node": "ticket_generate",
+          "offset_s": 12.5481,
+          "detail": "TKF0455D2C71"
+        },
+        {
+          "node": "prepare_reply",
+          "offset_s": 12.5666,
+          "detail": ""
+        }
+      ],
+      "stage_durations": {
+        "router": 1.9594,
+        "info_extract": 1.3388,
+        "knowledge_retrieve": 8.0196,
+        "tool_agent": 1.2029,
+        "policy_check": 0.0061,
+        "ticket_generate": 0.0213,
+        "prepare_reply": 0.0185,
+        "post_graph_or_faq_finalize": 3.2701
+      },
+      "final_llm_ttft_s": 1.2807,
+      "final_stream_and_finalize_s": 1.9894,
+      "answer_chars": 145,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "pending_info",
+      "request_index": 11,
+      "started_at": "2026-10-30T16:03:40.943481+08:00",
+      "e2e_s": 2.7753,
+      "ttfb_s": 0.3857,
+      "first_token_s": 2.7745,
+      "server_elapsed_s": 2.46,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "pending_info",
+      "source": null,
+      "ticket_id": null,
+      "need_human": false,
+      "tools": [],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 1.9477,
+          "detail": "refund"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 2.7552,
+          "detail": "缺失：订单号"
+        }
+      ],
+      "stage_durations": {
+        "router": 1.9477,
+        "info_extract": 0.8075,
+        "post_graph_or_faq_finalize": 0.0201
+      },
+      "final_llm_ttft_s": null,
+      "final_stream_and_finalize_s": null,
+      "answer_chars": 11,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "faq",
+      "request_index": 12,
+      "started_at": "2026-10-30T16:03:40.943640+08:00",
+      "e2e_s": 1.0255,
+      "ttfb_s": 0.3863,
+      "first_token_s": 1.0253,
+      "server_elapsed_s": 0.07,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "ai_solved",
+      "source": "faq",
+      "ticket_id": null,
+      "need_human": false,
+      "tools": [],
+      "stage_events": [
+        {
+          "node": "faq",
+          "offset_s": 1.0253,
+          "detail": "跳过 Agent 链路"
+        }
+      ],
+      "stage_durations": {
+        "faq": 1.0253,
+        "post_graph_or_faq_finalize": 0.0002
+      },
+      "final_llm_ttft_s": null,
+      "final_stream_and_finalize_s": null,
+      "answer_chars": 44,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "logistics",
+      "request_index": 13,
+      "started_at": "2026-10-30T16:03:40.943813+08:00",
+      "e2e_s": 16.3381,
+      "ttfb_s": 1.026,
+      "first_token_s": 14.0377,
+      "server_elapsed_s": 15.93,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "ai_solved",
+      "source": null,
+      "ticket_id": "TK7B79A77B5D",
+      "need_human": false,
+      "tools": [
+        "query_logistics"
+      ],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 1.9539,
+          "detail": "query_logistics"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.3094,
+          "detail": "信息完整"
+        },
+        {
+          "node": "knowledge_retrieve",
+          "offset_s": 11.3196,
+          "detail": "召回 1 条政策"
+        },
+        {
+          "node": "tool_agent",
+          "offset_s": 12.8609,
+          "detail": "query_logistics"
+        },
+        {
+          "node": "policy_check",
+          "offset_s": 12.8654,
+          "detail": "风险 low，自动处理"
+        },
+        {
+          "node": "ticket_generate",
+          "offset_s": 12.8829,
+          "detail": "TK7B79A77B5D"
+        },
+        {
+          "node": "prepare_reply",
+          "offset_s": 12.8833,
+          "detail": ""
+        }
+      ],
+      "stage_durations": {
+        "router": 1.9539,
+        "info_extract": 1.3555,
+        "knowledge_retrieve": 8.0102,
+        "tool_agent": 1.5413,
+        "policy_check": 0.0045,
+        "ticket_generate": 0.0175,
+        "prepare_reply": 0.0004,
+        "post_graph_or_faq_finalize": 3.4548
+      },
+      "final_llm_ttft_s": 1.1544,
+      "final_stream_and_finalize_s": 2.3004,
+      "answer_chars": 189,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "refund_high",
+      "request_index": 14,
+      "started_at": "2026-10-30T16:03:40.943976+08:00",
+      "e2e_s": 16.8706,
+      "ttfb_s": 1.0275,
+      "first_token_s": 13.9426,
+      "server_elapsed_s": 16.44,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "pending_human",
+      "source": null,
+      "ticket_id": "TKAEB92E3999",
+      "need_human": true,
+      "tools": [
+        "query_order"
+      ],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 2.1972,
+          "detail": "refund"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.3909,
+          "detail": "信息完整"
+        },
+        {
+          "node": "knowledge_retrieve",
+          "offset_s": 11.4101,
+          "detail": "召回 2 条政策"
+        },
+        {
+          "node": "tool_agent",
+          "offset_s": 12.438,
+          "detail": "query_order"
+        },
+        {
+          "node": "policy_check",
+          "offset_s": 12.4405,
+          "detail": "风险 high，转人工"
+        },
+        {
+          "node": "ticket_generate",
+          "offset_s": 12.4581,
+          "detail": "TKAEB92E3999"
+        },
+        {
+          "node": "prepare_reply",
+          "offset_s": 12.4925,
+          "detail": ""
+        }
+      ],
+      "stage_durations": {
+        "router": 2.1972,
+        "info_extract": 1.1937,
+        "knowledge_retrieve": 8.0192,
+        "tool_agent": 1.0279,
+        "policy_check": 0.0025,
+        "ticket_generate": 0.0176,
+        "prepare_reply": 0.0344,
+        "post_graph_or_faq_finalize": 4.3781
+      },
+      "final_llm_ttft_s": 1.4501,
+      "final_stream_and_finalize_s": 2.928,
+      "answer_chars": 216,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "pending_info",
+      "request_index": 15,
+      "started_at": "2026-10-30T16:03:40.944136+08:00",
+      "e2e_s": 3.1002,
+      "ttfb_s": 1.0283,
+      "first_token_s": 3.0993,
+      "server_elapsed_s": 2.65,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "pending_info",
+      "source": null,
+      "ticket_id": null,
+      "need_human": false,
+      "tools": [],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 2.1417,
+          "detail": "refund"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.0988,
+          "detail": "缺失：订单号"
+        }
+      ],
+      "stage_durations": {
+        "router": 2.1417,
+        "info_extract": 0.9571,
+        "post_graph_or_faq_finalize": 0.0014
+      },
+      "final_llm_ttft_s": null,
+      "final_stream_and_finalize_s": null,
+      "answer_chars": 11,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "faq",
+      "request_index": 16,
+      "started_at": "2026-10-30T16:03:40.944297+08:00",
+      "e2e_s": 1.1758,
+      "ttfb_s": 1.0289,
+      "first_token_s": 1.1754,
+      "server_elapsed_s": 0.58,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "ai_solved",
+      "source": "faq",
+      "ticket_id": null,
+      "need_human": false,
+      "tools": [],
+      "stage_events": [
+        {
+          "node": "faq",
+          "offset_s": 1.1754,
+          "detail": "跳过 Agent 链路"
+        }
+      ],
+      "stage_durations": {
+        "faq": 1.1754,
+        "post_graph_or_faq_finalize": 0.0004
+      },
+      "final_llm_ttft_s": null,
+      "final_stream_and_finalize_s": null,
+      "answer_chars": 44,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "logistics",
+      "request_index": 17,
+      "started_at": "2026-10-30T16:03:40.947869+08:00",
+      "e2e_s": 16.1379,
+      "ttfb_s": 1.0447,
+      "first_token_s": 14.151,
+      "server_elapsed_s": 15.65,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "ai_solved",
+      "source": null,
+      "ticket_id": "TK46F89A3053",
+      "need_human": false,
+      "tools": [
+        "query_logistics"
+      ],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 1.9257,
+          "detail": "query_logistics"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.095,
+          "detail": "信息完整"
+        },
+        {
+          "node": "knowledge_retrieve",
+          "offset_s": 11.0818,
+          "detail": "召回 1 条政策"
+        },
+        {
+          "node": "tool_agent",
+          "offset_s": 12.6396,
+          "detail": "query_logistics"
+        },
+        {
+          "node": "policy_check",
+          "offset_s": 12.645,
+          "detail": "风险 low，自动处理"
+        },
+        {
+          "node": "ticket_generate",
+          "offset_s": 12.6627,
+          "detail": "TK46F89A3053"
+        },
+        {
+          "node": "prepare_reply",
+          "offset_s": 12.6631,
+          "detail": ""
+        }
+      ],
+      "stage_durations": {
+        "router": 1.9257,
+        "info_extract": 1.1693,
+        "knowledge_retrieve": 7.9868,
+        "tool_agent": 1.5578,
+        "policy_check": 0.0054,
+        "ticket_generate": 0.0177,
+        "prepare_reply": 0.0004,
+        "post_graph_or_faq_finalize": 3.4748
+      },
+      "final_llm_ttft_s": 1.4879,
+      "final_stream_and_finalize_s": 1.9869,
+      "answer_chars": 179,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "refund_high",
+      "request_index": 18,
+      "started_at": "2026-10-30T16:03:40.948079+08:00",
+      "e2e_s": 16.7526,
+      "ttfb_s": 1.046,
+      "first_token_s": 14.2275,
+      "server_elapsed_s": 16.24,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "pending_human",
+      "source": null,
+      "ticket_id": "TKDCA0A716EF",
+      "need_human": true,
+      "tools": [
+        "query_order"
+      ],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 1.9367,
+          "detail": "refund"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.8772,
+          "detail": "信息完整"
+        },
+        {
+          "node": "knowledge_retrieve",
+          "offset_s": 11.8865,
+          "detail": "召回 2 条政策"
+        },
+        {
+          "node": "tool_agent",
+          "offset_s": 13.436,
+          "detail": "query_order"
+        },
+        {
+          "node": "policy_check",
+          "offset_s": 13.4387,
+          "detail": "风险 high，转人工"
+        },
+        {
+          "node": "ticket_generate",
+          "offset_s": 13.4633,
+          "detail": "TKDCA0A716EF"
+        },
+        {
+          "node": "prepare_reply",
+          "offset_s": 13.4665,
+          "detail": ""
+        }
+      ],
+      "stage_durations": {
+        "router": 1.9367,
+        "info_extract": 1.9405,
+        "knowledge_retrieve": 8.0093,
+        "tool_agent": 1.5495,
+        "policy_check": 0.0027,
+        "ticket_generate": 0.0246,
+        "prepare_reply": 0.0032,
+        "post_graph_or_faq_finalize": 3.2861
+      },
+      "final_llm_ttft_s": 0.761,
+      "final_stream_and_finalize_s": 2.5251,
+      "answer_chars": 200,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "pending_info",
+      "request_index": 19,
+      "started_at": "2026-10-30T16:03:40.948255+08:00",
+      "e2e_s": 3.4416,
+      "ttfb_s": 1.0468,
+      "first_token_s": 3.4409,
+      "server_elapsed_s": 2.91,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "pending_info",
+      "source": null,
+      "ticket_id": null,
+      "need_human": false,
+      "tools": [],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 1.9014,
+          "detail": "refund"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.4214,
+          "detail": "缺失：订单号"
+        }
+      ],
+      "stage_durations": {
+        "router": 1.9014,
+        "info_extract": 1.52,
+        "post_graph_or_faq_finalize": 0.0202
+      },
+      "final_llm_ttft_s": null,
+      "final_stream_and_finalize_s": null,
+      "answer_chars": 11,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "faq",
+      "request_index": 20,
+      "started_at": "2026-10-30T16:03:40.948428+08:00",
+      "e2e_s": 1.175,
+      "ttfb_s": 1.0475,
+      "first_token_s": 1.1743,
+      "server_elapsed_s": 0.51,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "ai_solved",
+      "source": "faq",
+      "ticket_id": null,
+      "need_human": false,
+      "tools": [],
+      "stage_events": [
+        {
+          "node": "faq",
+          "offset_s": 1.1742,
+          "detail": "跳过 Agent 链路"
+        }
+      ],
+      "stage_durations": {
+        "faq": 1.1742,
+        "post_graph_or_faq_finalize": 0.0008
+      },
+      "final_llm_ttft_s": null,
+      "final_stream_and_finalize_s": null,
+      "answer_chars": 44,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "logistics",
+      "request_index": 21,
+      "started_at": "2026-10-30T16:03:40.948598+08:00",
+      "e2e_s": 15.2141,
+      "ttfb_s": 1.0678,
+      "first_token_s": 13.1001,
+      "server_elapsed_s": 14.64,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "ai_solved",
+      "source": null,
+      "ticket_id": "TKAD5DBA845E",
+      "need_human": false,
+      "tools": [
+        "query_logistics"
+      ],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 1.8547,
+          "detail": "query_logistics"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.0358,
+          "detail": "信息完整"
+        },
+        {
+          "node": "knowledge_retrieve",
+          "offset_s": 11.0688,
+          "detail": "召回 1 条政策"
+        },
+        {
+          "node": "tool_agent",
+          "offset_s": 12.2232,
+          "detail": "query_logistics"
+        },
+        {
+          "node": "policy_check",
+          "offset_s": 12.2275,
+          "detail": "风险 low，自动处理"
+        },
+        {
+          "node": "ticket_generate",
+          "offset_s": 12.2462,
+          "detail": "TKAD5DBA845E"
+        },
+        {
+          "node": "prepare_reply",
+          "offset_s": 12.2477,
+          "detail": ""
+        }
+      ],
+      "stage_durations": {
+        "router": 1.8547,
+        "info_extract": 1.1811,
+        "knowledge_retrieve": 8.033,
+        "tool_agent": 1.1544,
+        "policy_check": 0.0043,
+        "ticket_generate": 0.0187,
+        "prepare_reply": 0.0015,
+        "post_graph_or_faq_finalize": 2.9664
+      },
+      "final_llm_ttft_s": 0.8524,
+      "final_stream_and_finalize_s": 2.114,
+      "answer_chars": 188,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "refund_high",
+      "request_index": 22,
+      "started_at": "2026-10-30T16:03:40.948778+08:00",
+      "e2e_s": 17.6751,
+      "ttfb_s": 1.0687,
+      "first_token_s": 14.5765,
+      "server_elapsed_s": 17.06,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "pending_human",
+      "source": null,
+      "ticket_id": "TK5E8AB63848",
+      "need_human": true,
+      "tools": [
+        "query_order、check_refund_eligibility"
+      ],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 1.9103,
+          "detail": "refund"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.0566,
+          "detail": "信息完整"
+        },
+        {
+          "node": "knowledge_retrieve",
+          "offset_s": 11.0776,
+          "detail": "召回 2 条政策"
+        },
+        {
+          "node": "tool_agent",
+          "offset_s": 13.1545,
+          "detail": "query_order、check_refund_eligibility"
+        },
+        {
+          "node": "policy_check",
+          "offset_s": 13.1572,
+          "detail": "风险 high，转人工"
+        },
+        {
+          "node": "ticket_generate",
+          "offset_s": 13.1844,
+          "detail": "TK5E8AB63848"
+        },
+        {
+          "node": "prepare_reply",
+          "offset_s": 13.1851,
+          "detail": ""
+        }
+      ],
+      "stage_durations": {
+        "router": 1.9103,
+        "info_extract": 1.1463,
+        "knowledge_retrieve": 8.021,
+        "tool_agent": 2.0769,
+        "policy_check": 0.0027,
+        "ticket_generate": 0.0272,
+        "prepare_reply": 0.0007,
+        "post_graph_or_faq_finalize": 4.49
+      },
+      "final_llm_ttft_s": 1.3914,
+      "final_stream_and_finalize_s": 3.0986,
+      "answer_chars": 245,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "pending_info",
+      "request_index": 23,
+      "started_at": "2026-10-30T16:03:40.948949+08:00",
+      "e2e_s": 3.0034,
+      "ttfb_s": 1.0695,
+      "first_token_s": 3.0021,
+      "server_elapsed_s": 2.38,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "pending_info",
+      "source": null,
+      "ticket_id": null,
+      "need_human": false,
+      "tools": [],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 1.9418,
+          "detail": "refund"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 2.973,
+          "detail": "缺失：订单号"
+        }
+      ],
+      "stage_durations": {
+        "router": 1.9418,
+        "info_extract": 1.0312,
+        "post_graph_or_faq_finalize": 0.0304
+      },
+      "final_llm_ttft_s": null,
+      "final_stream_and_finalize_s": null,
+      "answer_chars": 11,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "faq",
+      "request_index": 24,
+      "started_at": "2026-10-30T16:03:40.949119+08:00",
+      "e2e_s": 1.1776,
+      "ttfb_s": 1.0701,
+      "first_token_s": 1.1771,
+      "server_elapsed_s": 0.44,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "ai_solved",
+      "source": "faq",
+      "ticket_id": null,
+      "need_human": false,
+      "tools": [],
+      "stage_events": [
+        {
+          "node": "faq",
+          "offset_s": 1.1771,
+          "detail": "跳过 Agent 链路"
+        }
+      ],
+      "stage_durations": {
+        "faq": 1.1771,
+        "post_graph_or_faq_finalize": 0.0005
+      },
+      "final_llm_ttft_s": null,
+      "final_stream_and_finalize_s": null,
+      "answer_chars": 44,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "logistics",
+      "request_index": 25,
+      "started_at": "2026-10-30T16:03:40.949290+08:00",
+      "e2e_s": 15.5093,
+      "ttfb_s": 1.0896,
+      "first_token_s": 13.3773,
+      "server_elapsed_s": 14.83,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "ai_solved",
+      "source": null,
+      "ticket_id": "TK91BFA3D589",
+      "need_human": false,
+      "tools": [
+        "query_logistics"
+      ],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 1.9186,
+          "detail": "query_logistics"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.3109,
+          "detail": "信息完整"
+        },
+        {
+          "node": "knowledge_retrieve",
+          "offset_s": 11.3244,
+          "detail": "召回 1 条政策"
+        },
+        {
+          "node": "tool_agent",
+          "offset_s": 12.4873,
+          "detail": "query_logistics"
+        },
+        {
+          "node": "policy_check",
+          "offset_s": 12.4873,
+          "detail": "风险 low，自动处理"
+        },
+        {
+          "node": "ticket_generate",
+          "offset_s": 12.4919,
+          "detail": "TK91BFA3D589"
+        },
+        {
+          "node": "prepare_reply",
+          "offset_s": 12.4924,
+          "detail": ""
+        }
+      ],
+      "stage_durations": {
+        "router": 1.9186,
+        "info_extract": 1.3923,
+        "knowledge_retrieve": 8.0135,
+        "tool_agent": 1.1629,
+        "policy_check": 0.0,
+        "ticket_generate": 0.0046,
+        "prepare_reply": 0.0005,
+        "post_graph_or_faq_finalize": 3.0169
+      },
+      "final_llm_ttft_s": 0.8849,
+      "final_stream_and_finalize_s": 2.132,
+      "answer_chars": 194,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "refund_high",
+      "request_index": 26,
+      "started_at": "2026-10-30T16:03:40.949470+08:00",
+      "e2e_s": 15.7737,
+      "ttfb_s": 1.0906,
+      "first_token_s": 12.4044,
+      "server_elapsed_s": 15.08,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "pending_human",
+      "source": null,
+      "ticket_id": "TKB7478300FE",
+      "need_human": true,
+      "tools": [
+        "query_order"
+      ],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 1.9614,
+          "detail": "refund"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.2881,
+          "detail": "信息完整"
+        },
+        {
+          "node": "knowledge_retrieve",
+          "offset_s": 9.5097,
+          "detail": "召回 2 条政策"
+        },
+        {
+          "node": "tool_agent",
+          "offset_s": 11.0292,
+          "detail": "query_order"
+        },
+        {
+          "node": "policy_check",
+          "offset_s": 11.0323,
+          "detail": "风险 high，转人工"
+        },
+        {
+          "node": "ticket_generate",
+          "offset_s": 11.0614,
+          "detail": "TKB7478300FE"
+        },
+        {
+          "node": "prepare_reply",
+          "offset_s": 11.0803,
+          "detail": ""
+        }
+      ],
+      "stage_durations": {
+        "router": 1.9614,
+        "info_extract": 1.3267,
+        "knowledge_retrieve": 6.2216,
+        "tool_agent": 1.5195,
+        "policy_check": 0.0031,
+        "ticket_generate": 0.0291,
+        "prepare_reply": 0.0189,
+        "post_graph_or_faq_finalize": 4.6934
+      },
+      "final_llm_ttft_s": 1.3241,
+      "final_stream_and_finalize_s": 3.3693,
+      "answer_chars": 263,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "pending_info",
+      "request_index": 27,
+      "started_at": "2026-10-30T16:03:40.949641+08:00",
+      "e2e_s": 3.0327,
+      "ttfb_s": 1.0919,
+      "first_token_s": 3.0321,
+      "server_elapsed_s": 2.31,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "pending_info",
+      "source": null,
+      "ticket_id": null,
+      "need_human": false,
+      "tools": [],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 1.898,
+          "detail": "refund"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.0071,
+          "detail": "缺失：订单号"
+        }
+      ],
+      "stage_durations": {
+        "router": 1.898,
+        "info_extract": 1.1091,
+        "post_graph_or_faq_finalize": 0.0256
+      },
+      "final_llm_ttft_s": null,
+      "final_stream_and_finalize_s": null,
+      "answer_chars": 11,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "faq",
+      "request_index": 28,
+      "started_at": "2026-10-30T16:03:40.949816+08:00",
+      "e2e_s": 1.1802,
+      "ttfb_s": 1.0927,
+      "first_token_s": 1.1798,
+      "server_elapsed_s": 0.37,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "ai_solved",
+      "source": "faq",
+      "ticket_id": null,
+      "need_human": false,
+      "tools": [],
+      "stage_events": [
+        {
+          "node": "faq",
+          "offset_s": 1.1798,
+          "detail": "跳过 Agent 链路"
+        }
+      ],
+      "stage_durations": {
+        "faq": 1.1798,
+        "post_graph_or_faq_finalize": 0.0004
+      },
+      "final_llm_ttft_s": null,
+      "final_stream_and_finalize_s": null,
+      "answer_chars": 44,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "logistics",
+      "request_index": 29,
+      "started_at": "2026-10-30T16:03:40.949991+08:00",
+      "e2e_s": 17.5729,
+      "ttfb_s": 1.1149,
+      "first_token_s": 14.7944,
+      "server_elapsed_s": 16.81,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "ai_solved",
+      "source": null,
+      "ticket_id": "TK23BEB913B4",
+      "need_human": false,
+      "tools": [
+        "query_logistics"
+      ],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 2.1378,
+          "detail": "query_logistics"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.577,
+          "detail": "信息完整"
+        },
+        {
+          "node": "knowledge_retrieve",
+          "offset_s": 11.585,
+          "detail": "召回 1 条政策"
+        },
+        {
+          "node": "tool_agent",
+          "offset_s": 12.7533,
+          "detail": "query_logistics"
+        },
+        {
+          "node": "policy_check",
+          "offset_s": 12.7573,
+          "detail": "风险 low，自动处理"
+        },
+        {
+          "node": "ticket_generate",
+          "offset_s": 12.7766,
+          "detail": "TK23BEB913B4"
+        },
+        {
+          "node": "prepare_reply",
+          "offset_s": 12.7771,
+          "detail": ""
+        }
+      ],
+      "stage_durations": {
+        "router": 2.1378,
+        "info_extract": 1.4392,
+        "knowledge_retrieve": 8.008,
+        "tool_agent": 1.1683,
+        "policy_check": 0.004,
+        "ticket_generate": 0.0193,
+        "prepare_reply": 0.0005,
+        "post_graph_or_faq_finalize": 4.7958
+      },
+      "final_llm_ttft_s": 2.0173,
+      "final_stream_and_finalize_s": 2.7785,
+      "answer_chars": 206,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "refund_high",
+      "request_index": 30,
+      "started_at": "2026-10-30T16:03:40.950163+08:00",
+      "e2e_s": 17.9125,
+      "ttfb_s": 1.1164,
+      "first_token_s": 14.6496,
+      "server_elapsed_s": 17.13,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "pending_human",
+      "source": null,
+      "ticket_id": "TKE2E00638A5",
+      "need_human": true,
+      "tools": [
+        "query_order"
+      ],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 2.1738,
+          "detail": "refund"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.5613,
+          "detail": "信息完整"
+        },
+        {
+          "node": "knowledge_retrieve",
+          "offset_s": 11.5744,
+          "detail": "召回 2 条政策"
+        },
+        {
+          "node": "tool_agent",
+          "offset_s": 12.5871,
+          "detail": "query_order"
+        },
+        {
+          "node": "policy_check",
+          "offset_s": 12.5898,
+          "detail": "风险 high，转人工"
+        },
+        {
+          "node": "ticket_generate",
+          "offset_s": 12.6118,
+          "detail": "TKE2E00638A5"
+        },
+        {
+          "node": "prepare_reply",
+          "offset_s": 12.6124,
+          "detail": ""
+        }
+      ],
+      "stage_durations": {
+        "router": 2.1738,
+        "info_extract": 1.3875,
+        "knowledge_retrieve": 8.0131,
+        "tool_agent": 1.0127,
+        "policy_check": 0.0027,
+        "ticket_generate": 0.022,
+        "prepare_reply": 0.0006,
+        "post_graph_or_faq_finalize": 5.3001
+      },
+      "final_llm_ttft_s": 2.0372,
+      "final_stream_and_finalize_s": 3.2629,
+      "answer_chars": 206,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "pending_info",
+      "request_index": 31,
+      "started_at": "2026-10-30T16:03:40.950336+08:00",
+      "e2e_s": 2.8914,
+      "ttfb_s": 1.1174,
+      "first_token_s": 2.8903,
+      "server_elapsed_s": 2.08,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "pending_info",
+      "source": null,
+      "ticket_id": null,
+      "need_human": false,
+      "tools": [],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 1.9159,
+          "detail": "refund"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 2.8668,
+          "detail": "缺失：订单号"
+        }
+      ],
+      "stage_durations": {
+        "router": 1.9159,
+        "info_extract": 0.9509,
+        "post_graph_or_faq_finalize": 0.0246
+      },
+      "final_llm_ttft_s": null,
+      "final_stream_and_finalize_s": null,
+      "answer_chars": 11,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "faq",
+      "request_index": 32,
+      "started_at": "2026-10-30T16:03:40.950507+08:00",
+      "e2e_s": 1.1832,
+      "ttfb_s": 1.1181,
+      "first_token_s": 1.1827,
+      "server_elapsed_s": 0.31,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "ai_solved",
+      "source": "faq",
+      "ticket_id": null,
+      "need_human": false,
+      "tools": [],
+      "stage_events": [
+        {
+          "node": "faq",
+          "offset_s": 1.1826,
+          "detail": "跳过 Agent 链路"
+        }
+      ],
+      "stage_durations": {
+        "faq": 1.1826,
+        "post_graph_or_faq_finalize": 0.0006
+      },
+      "final_llm_ttft_s": null,
+      "final_stream_and_finalize_s": null,
+      "answer_chars": 44,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "logistics",
+      "request_index": 33,
+      "started_at": "2026-10-30T16:03:40.950690+08:00",
+      "e2e_s": 16.7273,
+      "ttfb_s": 1.1388,
+      "first_token_s": 14.2311,
+      "server_elapsed_s": 15.88,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "ai_solved",
+      "source": null,
+      "ticket_id": "TKFB1F03E3FA",
+      "need_human": false,
+      "tools": [
+        "query_logistics"
+      ],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 1.9629,
+          "detail": "query_logistics"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.1864,
+          "detail": "信息完整"
+        },
+        {
+          "node": "knowledge_retrieve",
+          "offset_s": 11.1989,
+          "detail": "召回 1 条政策"
+        },
+        {
+          "node": "tool_agent",
+          "offset_s": 12.3199,
+          "detail": "query_logistics"
+        },
+        {
+          "node": "policy_check",
+          "offset_s": 12.3243,
+          "detail": "风险 low，自动处理"
+        },
+        {
+          "node": "ticket_generate",
+          "offset_s": 12.342,
+          "detail": "TKFB1F03E3FA"
+        },
+        {
+          "node": "prepare_reply",
+          "offset_s": 12.3426,
+          "detail": ""
+        }
+      ],
+      "stage_durations": {
+        "router": 1.9629,
+        "info_extract": 1.2235,
+        "knowledge_retrieve": 8.0125,
+        "tool_agent": 1.121,
+        "policy_check": 0.0044,
+        "ticket_generate": 0.0177,
+        "prepare_reply": 0.0006,
+        "post_graph_or_faq_finalize": 4.3847
+      },
+      "final_llm_ttft_s": 1.8885,
+      "final_stream_and_finalize_s": 2.4962,
+      "answer_chars": 207,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "refund_high",
+      "request_index": 34,
+      "started_at": "2026-10-30T16:03:40.950915+08:00",
+      "e2e_s": 16.4409,
+      "ttfb_s": 1.1399,
+      "first_token_s": 14.0188,
+      "server_elapsed_s": 15.57,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "pending_human",
+      "source": null,
+      "ticket_id": "TK108109DFD5",
+      "need_human": true,
+      "tools": [
+        "query_order"
+      ],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 2.0187,
+          "detail": "refund"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.2674,
+          "detail": "信息完整"
+        },
+        {
+          "node": "knowledge_retrieve",
+          "offset_s": 11.275,
+          "detail": "召回 2 条政策"
+        },
+        {
+          "node": "tool_agent",
+          "offset_s": 12.5368,
+          "detail": "query_order"
+        },
+        {
+          "node": "policy_check",
+          "offset_s": 12.5412,
+          "detail": "风险 high，转人工"
+        },
+        {
+          "node": "ticket_generate",
+          "offset_s": 12.5595,
+          "detail": "TK108109DFD5"
+        },
+        {
+          "node": "prepare_reply",
+          "offset_s": 12.5627,
+          "detail": ""
+        }
+      ],
+      "stage_durations": {
+        "router": 2.0187,
+        "info_extract": 1.2487,
+        "knowledge_retrieve": 8.0076,
+        "tool_agent": 1.2618,
+        "policy_check": 0.0044,
+        "ticket_generate": 0.0183,
+        "prepare_reply": 0.0032,
+        "post_graph_or_faq_finalize": 3.8782
+      },
+      "final_llm_ttft_s": 1.4561,
+      "final_stream_and_finalize_s": 2.4221,
+      "answer_chars": 212,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "pending_info",
+      "request_index": 35,
+      "started_at": "2026-10-30T16:03:40.951179+08:00",
+      "e2e_s": 3.249,
+      "ttfb_s": 1.1405,
+      "first_token_s": 3.248,
+      "server_elapsed_s": 2.35,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "pending_info",
+      "source": null,
+      "ticket_id": null,
+      "need_human": false,
+      "tools": [],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 2.1871,
+          "detail": "refund"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.2197,
+          "detail": "缺失：订单号"
+        }
+      ],
+      "stage_durations": {
+        "router": 2.1871,
+        "info_extract": 1.0326,
+        "post_graph_or_faq_finalize": 0.0293
+      },
+      "final_llm_ttft_s": null,
+      "final_stream_and_finalize_s": null,
+      "answer_chars": 11,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "faq",
+      "request_index": 36,
+      "started_at": "2026-10-30T16:03:40.951371+08:00",
+      "e2e_s": 1.1852,
+      "ttfb_s": 1.1413,
+      "first_token_s": 1.1847,
+      "server_elapsed_s": 0.24,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "ai_solved",
+      "source": "faq",
+      "ticket_id": null,
+      "need_human": false,
+      "tools": [],
+      "stage_events": [
+        {
+          "node": "faq",
+          "offset_s": 1.1847,
+          "detail": "跳过 Agent 链路"
+        }
+      ],
+      "stage_durations": {
+        "faq": 1.1847,
+        "post_graph_or_faq_finalize": 0.0005
+      },
+      "final_llm_ttft_s": null,
+      "final_stream_and_finalize_s": null,
+      "answer_chars": 44,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "logistics",
+      "request_index": 37,
+      "started_at": "2026-10-30T16:03:40.951552+08:00",
+      "e2e_s": 16.7701,
+      "ttfb_s": 1.1617,
+      "first_token_s": 14.379,
+      "server_elapsed_s": 15.82,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "ai_solved",
+      "source": null,
+      "ticket_id": "TK61D57060C6",
+      "need_human": false,
+      "tools": [
+        "query_logistics"
+      ],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 1.9802,
+          "detail": "query_logistics"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.0048,
+          "detail": "信息完整"
+        },
+        {
+          "node": "knowledge_retrieve",
+          "offset_s": 11.0118,
+          "detail": "召回 1 条政策"
+        },
+        {
+          "node": "tool_agent",
+          "offset_s": 12.1428,
+          "detail": "query_logistics"
+        },
+        {
+          "node": "policy_check",
+          "offset_s": 12.1482,
+          "detail": "风险 low，自动处理"
+        },
+        {
+          "node": "ticket_generate",
+          "offset_s": 12.166,
+          "detail": "TK61D57060C6"
+        },
+        {
+          "node": "prepare_reply",
+          "offset_s": 12.1667,
+          "detail": ""
+        }
+      ],
+      "stage_durations": {
+        "router": 1.9802,
+        "info_extract": 1.0246,
+        "knowledge_retrieve": 8.007,
+        "tool_agent": 1.131,
+        "policy_check": 0.0054,
+        "ticket_generate": 0.0178,
+        "prepare_reply": 0.0007,
+        "post_graph_or_faq_finalize": 4.6034
+      },
+      "final_llm_ttft_s": 2.2123,
+      "final_stream_and_finalize_s": 2.3911,
+      "answer_chars": 197,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "refund_high",
+      "request_index": 38,
+      "started_at": "2026-10-30T16:03:40.951749+08:00",
+      "e2e_s": 7.9463,
+      "ttfb_s": 1.1633,
+      "first_token_s": 5.1915,
+      "server_elapsed_s": 6.98,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "pending_human",
+      "source": null,
+      "ticket_id": "TK675055DC0B",
+      "need_human": true,
+      "tools": [
+        "query_order"
+      ],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 1.8584,
+          "detail": "refund"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 3.1277,
+          "detail": "信息完整"
+        },
+        {
+          "node": "knowledge_retrieve",
+          "offset_s": 3.481,
+          "detail": "召回 2 条政策"
+        },
+        {
+          "node": "tool_agent",
+          "offset_s": 4.4274,
+          "detail": "query_order"
+        },
+        {
+          "node": "policy_check",
+          "offset_s": 4.4297,
+          "detail": "风险 high，转人工"
+        },
+        {
+          "node": "ticket_generate",
+          "offset_s": 4.4467,
+          "detail": "TK675055DC0B"
+        },
+        {
+          "node": "prepare_reply",
+          "offset_s": 4.4474,
+          "detail": ""
+        }
+      ],
+      "stage_durations": {
+        "router": 1.8584,
+        "info_extract": 1.2693,
+        "knowledge_retrieve": 0.3533,
+        "tool_agent": 0.9464,
+        "policy_check": 0.0023,
+        "ticket_generate": 0.017,
+        "prepare_reply": 0.0007,
+        "post_graph_or_faq_finalize": 3.4989
+      },
+      "final_llm_ttft_s": 0.7441,
+      "final_stream_and_finalize_s": 2.7548,
+      "answer_chars": 216,
+      "error": null
+    },
+    {
+      "run_id": "load-20261030-160340-4b4b5a",
+      "scenario": "pending_info",
+      "request_index": 39,
+      "started_at": "2026-10-30T16:03:40.951928+08:00",
+      "e2e_s": 2.8632,
+      "ttfb_s": 1.1634,
+      "first_token_s": 2.8625,
+      "server_elapsed_s": 1.87,
+      "http_status": 200,
+      "http_success": true,
+      "business_success": true,
+      "done_status": "pending_info",
+      "source": null,
+      "ticket_id": null,
+      "need_human": false,
+      "tools": [],
+      "stage_events": [
+        {
+          "node": "router",
+          "offset_s": 1.8547,
+          "detail": "refund"
+        },
+        {
+          "node": "info_extract",
+          "offset_s": 2.8427,
+          "detail": "缺失：订单号"
+        }
+      ],
+      "stage_durations": {
+        "router": 1.8547,
+        "info_extract": 0.988,
+        "post_graph_or_faq_finalize": 0.0205
+      },
+      "final_llm_ttft_s": null,
+      "final_stream_and_finalize_s": null,
+      "answer_chars": 11,
+      "error": null
+    }
+  ],
+  "resource_samples": [
+    {
+      "timestamp": 1793347420.8885665,
+      "time": "2026-10-30T16:03:40.922900+08:00",
+      "alive_processes": 1,
+      "process_cpu_percent": 0.0,
+      "system_cpu_percent": 31.2,
+      "process_rss_bytes": 100560896,
+      "system_memory_percent": 66.0,
+      "threads": 76,
+      "handles": 517,
+      "process_read_bps": null,
+      "process_write_bps": null,
+      "system_disk_read_bps": null,
+      "system_disk_write_bps": null,
+      "system_net_sent_bps": null,
+      "system_net_recv_bps": null
+    },
+    {
+      "timestamp": 1793347421.9358127,
+      "time": "2026-10-30T16:03:41.967172+08:00",
+      "alive_processes": 1,
+      "process_cpu_percent": 47.8,
+      "system_cpu_percent": 23.1,
+      "process_rss_bytes": 102465536,
+      "system_memory_percent": 66.0,
+      "threads": 76,
+      "handles": 559,
+      "process_read_bps": 8445784.620919123,
+      "process_write_bps": 1043254.1856017652,
+      "system_disk_read_bps": 82135.41242157885,
+      "system_disk_write_bps": 4095036.9907330023,
+      "system_net_sent_bps": 51017.61084984322,
+      "system_net_recv_bps": 11370.773938757451
+    },
+    {
+      "timestamp": 1793347422.9697244,
+      "time": "2026-10-30T16:03:43.004935+08:00",
+      "alive_processes": 1,
+      "process_cpu_percent": 22.7,
+      "system_cpu_percent": 16.4,
+      "process_rss_bytes": 107286528,
+      "system_memory_percent": 66.1,
+      "threads": 78,
+      "handles": 594,
+      "process_read_bps": 95752.85734710161,
+      "process_write_bps": 177896.23534338435,
+      "system_disk_read_bps": 15846.614290655683,
+      "system_disk_write_bps": 1093416.3860552423,
+      "system_net_sent_bps": 190420.51564426938,
+      "system_net_recv_bps": 184799.14587758904
+    },
+    {
+      "timestamp": 1793347424.0055594,
+      "time": "2026-10-30T16:03:44.042225+08:00",
+      "alive_processes": 1,
+      "process_cpu_percent": 16.6,
+      "system_cpu_percent": 16.5,
+      "process_rss_bytes": 107651072,
+      "system_memory_percent": 66.0,
+      "threads": 78,
+      "handles": 595,
+      "process_read_bps": 529149.8987245567,
+      "process_write_bps": 156497.8936469973,
+      "system_disk_read_bps": 11862.892904237367,
+      "system_disk_write_bps": 1826885.5072525546,
+      "system_net_sent_bps": 97496.2202473089,
+      "system_net_recv_bps": 36771.29946529111
+    },
+    {
+      "timestamp": 1793347425.0448334,
+      "time": "2026-10-30T16:03:45.097581+08:00",
+      "alive_processes": 1,
+      "process_cpu_percent": 45.1,
+      "system_cpu_percent": 30.3,
+      "process_rss_bytes": 120348672,
+      "system_memory_percent": 66.6,
+      "threads": 84,
+      "handles": 630,
+      "process_read_bps": 4254408.458848767,
+      "process_write_bps": 101039.76650590464,
+      "system_disk_read_bps": 1237540.8488207585,
+      "system_disk_write_bps": 8426313.168085292,
+      "system_net_sent_bps": 177941.52845437438,
+      "system_net_recv_bps": 188487.35201929053
+    },
+    {
+      "timestamp": 1793347426.1053824,
+      "time": "2026-10-30T16:03:46.141700+08:00",
+      "alive_processes": 1,
+      "process_cpu_percent": 5.9,
+      "system_cpu_percent": 23.8,
+      "process_rss_bytes": 121565184,
+      "system_memory_percent": 66.8,
+      "threads": 85,
+      "handles": 636,
+      "process_read_bps": 323820.95808410697,
+      "process_write_bps": 52970.67735667727,
+      "system_disk_read_bps": 185383.22713057787,
+      "system_disk_write_bps": 14927211.934576739,
+      "system_net_sent_bps": 131747.79973765052,
+      "system_net_recv_bps": 72800.97240969232
+    },
+    {
+      "timestamp": 1793347427.1508124,
+      "time": "2026-10-30T16:03:47.184317+08:00",
+      "alive_processes": 1,
+      "process_cpu_percent": 4.5,
+      "system_cpu_percent": 15.7,
+      "process_rss_bytes": 121565184,
+      "system_memory_percent": 66.7,
+      "threads": 85,
+      "handles": 626,
+      "process_read_bps": 0.0,
+      "process_write_bps": 0.0,
+      "system_disk_read_bps": 0.0,
+      "system_disk_write_bps": 380046.50804508524,
+      "system_net_sent_bps": 124919.89599646602,
+      "system_net_recv_bps": 25131.28701340137
+    },
+    {
+      "timestamp": 1793347428.194829,
+      "time": "2026-10-30T16:03:48.228817+08:00",
+      "alive_processes": 1,
+      "process_cpu_percent": 6.0,
+      "system_cpu_percent": 19.1,
+      "process_rss_bytes": 121565184,
+      "system_memory_percent": 66.7,
+      "threads": 85,
+      "handles": 626,
+      "process_read_bps": 0.0,
+      "process_write_bps": 0.0,
+      "system_disk_read_bps": 0.0,
+      "system_disk_write_bps": 1290768.748739359,
+      "system_net_sent_bps": 143047.53396577196,
+      "system_net_recv_bps": 42181.321651922175
+    },
+    {
+      "timestamp": 1793347429.2386189,
+      "time": "2026-10-30T16:03:49.272112+08:00",
+      "alive_processes": 1,
+      "process_cpu_percent": 4.5,
+      "system_cpu_percent": 13.4,
+      "process_rss_bytes": 121565184,
+      "system_memory_percent": 66.7,
+      "threads": 85,
+      "handles": 613,
+      "process_read_bps": 15807.779492422518,
+      "process_write_bps": 24221.35037135916,
+      "system_disk_read_bps": 0.0,
+      "system_disk_write_bps": 686728.2630405128,
+      "system_net_sent_bps": 145590.60717245337,
+      "system_net_recv_bps": 40451.628697488246
+    },
+    {
+      "timestamp": 1793347430.283944,
+      "time": "2026-10-30T16:03:50.315115+08:00",
+      "alive_processes": 1,
+      "process_cpu_percent": 3.0,
+      "system_cpu_percent": 14.6,
+      "process_rss_bytes": 121565184,
+      "system_memory_percent": 66.7,
+      "threads": 85,
+      "handles": 611,
+      "process_read_bps": 0.0,
+      "process_write_bps": 0.0,
+      "system_disk_read_bps": 0.0,
+      "system_disk_write_bps": 1242132.3026805653,
+      "system_net_sent_bps": 105454.28043493185,
+      "system_net_recv_bps": 29070.383673428427
+    },
+    {
+      "timestamp": 1793347431.3193047,
+      "time": "2026-10-30T16:03:51.351250+08:00",
+      "alive_processes": 1,
+      "process_cpu_percent": 0.0,
+      "system_cpu_percent": 20.0,
+      "process_rss_bytes": 121614336,
+      "system_memory_percent": 66.9,
+      "threads": 86,
+      "handles": 593,
+      "process_read_bps": 15936.473343959795,
+      "process_write_bps": 24638.753636631176,
+      "system_disk_read_bps": 3956.108776779353,
+      "system_disk_write_bps": 640889.6218382552,
+      "system_net_sent_bps": 151337.58010858888,
+      "system_net_recv_bps": 27940.98408287351
+    },
+    {
+      "timestamp": 1793347432.35414,
+      "time": "2026-10-30T16:03:52.391863+08:00",
+      "alive_processes": 1,
+      "process_cpu_percent": 12.1,
+      "system_cpu_percent": 24.6,
+      "process_rss_bytes": 121507840,
+      "system_memory_percent": 67.2,
+      "threads": 78,
+      "handles": 575,
+      "process_read_bps": 44617.726393841695,
+      "process_write_bps": 28699.251844639704,
+      "system_disk_read_bps": 27706.82342467792,
+      "system_disk_write_bps": 1044943.0548735673,
+      "system_net_sent_bps": 184543.36924726536,
+      "system_net_recv_bps": 76295.22983567927
+    },
+    {
+      "timestamp": 1793347433.402175,
+      "time": "2026-10-30T16:03:53.435879+08:00",
+      "alive_processes": 1,
+      "process_cpu_percent": 10.5,
+      "system_cpu_percent": 25.9,
+      "process_rss_bytes": 121516032,
+      "system_memory_percent": 67.2,
+      "threads": 78,
+      "handles": 580,
+      "process_read_bps": 264262.1904213976,
+      "process_write_bps": 125383.22836304025,
+      "system_disk_read_bps": 15633.067085978202,
+      "system_disk_write_bps": 1883784.5838603734,
+      "system_net_sent_bps": 193975.40936949258,
+      "system_net_recv_bps": 56271.980675998806
+    },
+    {
+      "timestamp": 1793347434.440924,
+      "time": "2026-10-30T16:03:54.474553+08:00",
+      "alive_processes": 1,
+      "process_cpu_percent": 22.6,
+      "system_cpu_percent": 24.0,
+      "process_rss_bytes": 121536512,
+      "system_memory_percent": 67.3,
+      "threads": 78,
+      "handles": 579,
+      "process_read_bps": 596170.982769349,
+      "process_write_bps": 304064.79930426466,
+      "system_disk_read_bps": 23659.22901816895,
+      "system_disk_write_bps": 1596997.958726404,
+      "system_net_sent_bps": 191107.76896499726,
+      "system_net_recv_bps": 57141.81305348454
+    },
+    {
+      "timestamp": 1793347435.4776003,
+      "time": "2026-10-30T16:03:55.509813+08:00",
+      "alive_processes": 1,
+      "process_cpu_percent": 15.1,
+      "system_cpu_percent": 20.4,
+      "process_rss_bytes": 121544704,
+      "system_memory_percent": 67.4,
+      "threads": 78,
+      "handles": 579,
+      "process_read_bps": 0.0,
+      "process_write_bps": 0.0,
+      "system_disk_read_bps": 0.0,
+      "system_disk_write_bps": 39510.88278747491,
+      "system_net_sent_bps": 96198.77460318629,
+      "system_net_recv_bps": 165872.39649909755
+    },
+    {
+      "timestamp": 1793347436.5122144,
+      "time": "2026-10-30T16:03:56.545511+08:00",
+      "alive_processes": 1,
+      "process_cpu_percent": 30.2,
+      "system_cpu_percent": 20.0,
+      "process_rss_bytes": 121544704,
+      "system_memory_percent": 67.5,
+      "threads": 78,
+      "handles": 576,
+      "process_read_bps": 31895.950810764225,
+      "process_write_bps": 48872.32899380249,
+      "system_disk_read_bps": 3958.964076390614,
+      "system_disk_write_bps": 1231237.827757481,
+      "system_net_sent_bps": 101233.8816975098,
+      "system_net_recv_bps": 317631.4767011577
+    },
+    {
+      "timestamp": 1793347437.5470128,
+      "time": "2026-10-30T16:03:57.578812+08:00",
+      "alive_processes": 1,
+      "process_cpu_percent": 25.7,
+      "system_cpu_percent": 18.0,
+      "process_rss_bytes": 121552896,
+      "system_memory_percent": 67.6,
+      "threads": 78,
+      "handles": 569,
+      "process_read_bps": 111615.94550002662,
+      "process_write_bps": 174980.94590207635,
+      "system_disk_read_bps": 11874.776955015817,
+      "system_disk_write_bps": 934149.1204612444,
+      "system_net_sent_bps": 132599.7432540316,
+      "system_net_recv_bps": 211688.5795801587
+    },
+    {
+      "timestamp": 1793347438.5893118,
+      "time": "2026-10-30T16:03:58.622305+08:00",
+      "alive_processes": 1,
+      "process_cpu_percent": 12.0,
+      "system_cpu_percent": 18.3,
+      "process_rss_bytes": 121552896,
+      "system_memory_percent": 67.9,
+      "threads": 78,
+      "handles": 564,
+      "process_read_bps": 110812.72881445491,
+      "process_write_bps": 161769.3145529253,
+      "system_disk_read_bps": 11789.32304477941,
+      "system_disk_write_bps": 1355772.1501496322,
+      "system_net_sent_bps": 124290.6267745022,
+      "system_net_recv_bps": 91669.47013017077
+    },
+    {
+      "timestamp": 1793347438.8655052,
+      "time": "2026-10-30T16:03:58.905818+08:00",
+      "alive_processes": 1,
+      "process_cpu_percent": 5.6,
+      "system_cpu_percent": 30.9,
+      "process_rss_bytes": 121552896,
+      "system_memory_percent": 68.0,
+      "threads": 78,
+      "handles": 542,
+      "process_read_bps": 119481.50226295904,
+      "process_write_bps": 243010.89299652376,
+      "system_disk_read_bps": 29660.377773883647,
+      "system_disk_write_bps": 1364377.3775986477,
+      "system_net_sent_bps": 86732.70868815709,
+      "system_net_recv_bps": 34207.91616304354
+    }
+  ]
+}

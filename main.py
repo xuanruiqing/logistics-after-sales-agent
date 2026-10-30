@@ -16,18 +16,20 @@ from src.agent.graph_builder import build_graph
 from src.clients import llm_client
 from src.config import config
 from src.db.database import (
-    get_ticket,
+    aget_ticket,
+    aload_history,
+    asave_message,
+    aupdate_ticket_review,
     init_db,
-    load_history,
-    save_message,
-    update_ticket_review,
 )
 from src.faq.faq_matcher import faq_match
 from src.rag.ingest import ensure_index, init_md5_db
+from src.rag.retriever import retrieval_metrics
 from src.schemas import ChatRequest, ReviewRequest
 from src.utils import gen_trace_id, logger
 
 agent_graph = None
+STARTED_AT = time.time()
 
 NODE_LABELS = {
     "router": "意图识别",
@@ -91,8 +93,9 @@ async def chat(req: ChatRequest):
     trace_id = gen_trace_id()
     session_id = req.session_id
     started = time.time()
-    history = load_history(session_id, config.MAX_CHAT_TURN * 2)
-    save_message(session_id, "user", req.user_input)
+    # 同步 SQLite 读写放到线程池，避免阻塞事件循环
+    history = await aload_history(session_id, config.MAX_CHAT_TURN * 2)
+    await asave_message(session_id, "user", req.user_input)
 
     async def event_stream():
         # ---------- FAQ 短路：纯政策咨询不走 Agent ----------
@@ -100,10 +103,11 @@ async def chat(req: ChatRequest):
         if faq_answer:
             yield _sse({"type": "stage", "node": "faq", "label": "FAQ 命中", "detail": "跳过 Agent 链路"})
             yield _sse({"type": "token", "content": faq_answer})
-            save_message(session_id, "assistant", faq_answer)
+            await asave_message(session_id, "assistant", faq_answer)
             yield _sse({
                 "type": "done", "ticket_id": None, "status": "ai_solved",
                 "need_human": False, "citations": [], "source": "faq",
+                "degraded": False, "degraded_reasons": [], "retrieval_mode": "faq",
                 "elapsed": round(time.time() - started, 2),
             })
             return
@@ -122,6 +126,9 @@ async def chat(req: ChatRequest):
                 for node, update in chunk.items():
                     if isinstance(update, dict):
                         final_state.update(update)
+                    # 内部扇出节点不对外暴露 stage 事件
+                    if node not in NODE_LABELS:
+                        continue
                     yield _sse({
                         "type": "stage", "node": node,
                         "label": NODE_LABELS.get(node, node),
@@ -130,11 +137,12 @@ async def chat(req: ChatRequest):
         except Exception as e:
             logger.error(f"[TRACE] trace_id={trace_id} | 工作流异常: {e}", exc_info=True)
             fallback = "服务异常，请稍后重试"
-            save_message(session_id, "assistant", fallback)
+            await asave_message(session_id, "assistant", fallback)
             yield _sse({"type": "token", "content": fallback})
             yield _sse({
                 "type": "done", "ticket_id": None, "status": "error",
                 "need_human": True, "citations": [],
+                "degraded": False, "degraded_reasons": ["workflow_error"], "retrieval_mode": "error",
                 "elapsed": round(time.time() - started, 2),
             })
             return
@@ -142,11 +150,12 @@ async def chat(req: ChatRequest):
         # ---------- 信息不完整：返回追问 ----------
         if not final_state.get("info_is_complete", True):
             reply = final_state.get("ask_user_prompt") or "请补充订单号后再试"
-            save_message(session_id, "assistant", reply)
+            await asave_message(session_id, "assistant", reply)
             yield _sse({"type": "token", "content": reply})
             yield _sse({
                 "type": "done", "ticket_id": None, "status": "pending_info",
                 "need_human": False, "citations": [],
+                "degraded": False, "degraded_reasons": [], "retrieval_mode": "skipped",
                 "elapsed": round(time.time() - started, 2),
             })
             return
@@ -177,19 +186,24 @@ async def chat(req: ChatRequest):
             reply_text = final_state.get("reply_content") or "抱歉，生成回复失败，请稍后重试"
             yield _sse({"type": "token", "content": reply_text})
 
-        save_message(session_id, "assistant", reply_text)
+        await asave_message(session_id, "assistant", reply_text)
 
         ticket = final_state.get("ticket") or {}
         citations = [
             {"source": d.get("source"), "chunk_index": d.get("chunk_index")}
             for d in (final_state.get("policy_docs") or [])[:3]
         ]
+        retrieval_meta = final_state.get("retrieval_meta") or {}
+        reason = retrieval_meta.get("reason")
         yield _sse({
             "type": "done",
             "ticket_id": ticket.get("ticket_id"),
             "status": ticket.get("status") or ("pending_human" if final_state.get("need_human_interrupt") else "ai_solved"),
             "need_human": bool(final_state.get("need_human_interrupt")),
             "citations": citations,
+            "degraded": bool(retrieval_meta.get("degraded")),
+            "degraded_reasons": [reason] if reason else [],
+            "retrieval_mode": retrieval_meta.get("mode") or "unknown",
             "elapsed": round(time.time() - started, 2),
         })
 
@@ -202,7 +216,7 @@ async def chat(req: ChatRequest):
 
 @app.get("/api/tickets/{ticket_id}")
 async def ticket_detail(ticket_id: str):
-    ticket = get_ticket(ticket_id)
+    ticket = await aget_ticket(ticket_id)
     if not ticket:
         raise HTTPException(status_code=404, detail="工单不存在")
     return {"code": 200, "ticket": ticket}
@@ -210,7 +224,7 @@ async def ticket_detail(ticket_id: str):
 
 @app.post("/api/tickets/{ticket_id}/review")
 async def review_ticket(ticket_id: str, req: ReviewRequest):
-    ticket = update_ticket_review(ticket_id, req.approved, req.comment)
+    ticket = await aupdate_ticket_review(ticket_id, req.approved, req.comment)
     if not ticket:
         raise HTTPException(status_code=404, detail="工单不存在")
     logger.info(f"[REVIEW] ticket={ticket_id} approved={req.approved} status={ticket['status']}")
@@ -220,6 +234,16 @@ async def review_ticket(ticket_id: str, req: ReviewRequest):
 @app.get("/api/health")
 async def health():
     return {"status": "ok", "nodes": len(NODE_LABELS), "model": config.VOLC_MODEL_EP}
+
+
+@app.get("/api/metrics")
+async def metrics():
+    """运行指标：检索降级/熔断/缓存命中，用于性能门禁与线上观测。"""
+    return {
+        "status": "ok",
+        "uptime_s": round(time.time() - STARTED_AT, 1),
+        "retrieval": retrieval_metrics(),
+    }
 
 
 @app.get("/")

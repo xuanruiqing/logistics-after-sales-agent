@@ -1,3 +1,14 @@
+"""七节点工作流的具体实现。
+
+性能优化（对应性能报告 P0）：
+1. 意图路由优先使用确定性关键词规则，命中即跳过 LLM；
+2. 需要模型判断时，把「意图 + 信息抽取」合并为一次结构化调用，而不是两次串行调用；
+3. 工具节点在订单号与意图明确时直接调用本地工具，不再经过 LLM tool-calling；
+4. 政策检索与业务工具查询在图中并行执行，只保留真实的数据依赖；
+5. 所有 SQLite 同步操作通过线程池执行，不阻塞事件循环。
+"""
+
+import asyncio
 import json
 import re
 import time
@@ -10,11 +21,16 @@ from src.agent.state import AfterSalesState
 from src.agent.tools import TOOL_SPECS, execute_tool
 from src.clients import llm_client
 from src.config import config
-from src.db.database import get_order
+from src.db.database import aget_order
 from src.observability import trace_logger
-from src.rag.retriever import retrieve_knowledge
+from src.rag.retriever import retrieve_knowledge_ex
 from src.schemas import REQUEST_TYPES, ExtractResult, PolicyDecision
 from src.utils import logger
+
+# 需要订单号才能进入自动处理闭环的诉求类型
+ORDER_REQUIRED_TYPES = ("query_logistics", "refund", "exchange", "damage_claim")
+# 命中即可直接调用本地工具、无需 LLM 决策的诉求类型
+DETERMINISTIC_TOOL_TYPES = ("query_logistics", "refund", "exchange", "damage_claim", "complaint")
 
 # ==================== 通用工具函数 ====================
 def _history_text(history: List[Dict[str, str]]) -> str:
@@ -45,7 +61,7 @@ async def _chat(messages: List[Dict], tools: Optional[List[Dict]] = None,
 
 
 def _rule_route(text: str) -> str:
-    """LLM 不可用时的关键词兜底分类。"""
+    """确定性关键词分类；无法判断时返回 other，交由 LLM 兜底。"""
     if re.search(r"投诉|态度|差评|道歉|维权", text):
         return "complaint"
     if re.search(r"破损|损坏|坏了|少件|漏发|漏了|理赔|赔偿|补发", text):
@@ -70,34 +86,34 @@ def _normalize_type(raw: str, text: str) -> str:
     return _rule_route(text)
 
 
-# ==================== 节点 1：意图路由 ====================
-async def router_agent(state: AfterSalesState):
-    start = time.time()
-    text = state["user_input"]
-    prompt = PROMPTS["router"].format(history=_history_text(state.get("history", [])), user_input=text)
-    try:
-        resp = await _chat([{"role": "user", "content": prompt}], temperature=0.0, max_tokens=24)
-        raw = resp.choices[0].message.content or ""
-        if getattr(resp, "usage", None):
-            trace_logger.log_llm(state.get("trace_id", "-"), "router",
-                                 resp.usage.prompt_tokens, resp.usage.completion_tokens,
-                                 time.time() - start)
-    except Exception as e:
-        logger.warning(f"路由 LLM 调用失败，使用关键词兜底: {e}")
-        raw = ""
-
-    request_type = _normalize_type(raw, text)
-    trace_logger.log_node(state.get("trace_id", "-"), "router_agent", text, request_type, time.time() - start)
-    return {"request_type": request_type}
+def _order_no_from(text: str) -> Optional[str]:
+    matched = re.search(r"DD\d{6,}", text or "")
+    return matched.group() if matched else None
 
 
-# ==================== 节点 2：信息抽取 ====================
-async def info_extract_agent(state: AfterSalesState):
-    start = time.time()
-    text = state["user_input"]
-    prompt = PROMPTS["info_extract"].format(history=_history_text(state.get("history", [])), user_input=text)
+def _extract_order_no(text: str, history: List[Dict[str, str]]) -> Optional[str]:
+    """当前问句优先，其次从历史中的用户消息回填，避免依赖模型记忆订单号。"""
+    order_no = _order_no_from(text)
+    if order_no:
+        return order_no
+    for message in reversed(history or []):
+        if message.get("role") != "user":
+            continue
+        order_no = _order_no_from(message.get("content", ""))
+        if order_no:
+            return order_no
+    return None
 
-    extract: Optional[ExtractResult] = None
+
+def _extract_product_id(text: str) -> Optional[str]:
+    matched = re.search(r"(?:商品编号|商品ID)[:：]?\s*([A-Za-z0-9\-]+)", text or "")
+    return matched.group(1) if matched else None
+
+
+async def _analyze(text: str, history: List[Dict[str, str]], trace_id: str) -> Optional[Dict]:
+    """一次调用同时完成意图分类与信息抽取，替代原来的两次串行调用。"""
+    started = time.time()
+    prompt = PROMPTS["info_extract"].format(history=_history_text(history), user_input=text)
     try:
         resp = await _chat(
             [{"role": "user", "content": prompt}],
@@ -107,22 +123,56 @@ async def info_extract_agent(state: AfterSalesState):
         )
         raw = (resp.choices[0].message.content or "").replace("```json", "").replace("```", "").strip()
         extract = ExtractResult.model_validate_json(raw)
+        if getattr(resp, "usage", None):
+            trace_logger.log_llm(trace_id, "analyze", resp.usage.prompt_tokens,
+                                 resp.usage.completion_tokens, time.time() - started)
+        return {
+            "request_type": _normalize_type(extract.request_type, text),
+            "order_no": extract.order_no,
+            "product_id": extract.product_id,
+        }
     except Exception as e:
-        logger.warning(f"信息抽取失败，启用正则兜底: {e}")
+        logger.warning(f"意图+抽取合并调用失败，启用规则兜底: {e}")
+        return None
 
-    order_no = re.search(r"DD\d{6,}", text)
-    order_no = order_no.group() if order_no else (extract.order_no if extract else None)
-    product_match = re.search(r"(?:商品编号|商品ID)[:：]?\s*([A-Za-z0-9\-]+)", text)
-    product_id = product_match.group(1) if product_match else (extract.product_id if extract else None)
 
-    # router 的分类作为主分类，避免两个 prompt 的分类体系打架
-    request_type = state.get("request_type") or (extract.request_type if extract else "other")
-    if request_type == "other" and extract and extract.request_type in REQUEST_TYPES:
-        request_type = extract.request_type
+# ==================== 节点 1：意图路由 ====================
+async def router_agent(state: AfterSalesState):
+    start = time.time()
+    text = state["user_input"]
+    history = state.get("history", [])
+    trace_id = state.get("trace_id", "-")
+
+    # 高置信关键词直接路由，跳过 LLM 网络往返
+    request_type = _rule_route(text)
+    analysis: Optional[Dict] = None
+
+    if request_type == "other":
+        # 规则无法判断时才调用模型，并且一次调用同时产出意图与抽取字段
+        analysis = await _analyze(text, history, trace_id)
+        if analysis:
+            request_type = analysis["request_type"]
+
+    trace_logger.log_node(trace_id, "router_agent", text, request_type, time.time() - start)
+    return {"request_type": request_type, "analysis": analysis}
+
+
+# ==================== 节点 2：信息抽取 ====================
+async def info_extract_agent(state: AfterSalesState):
+    start = time.time()
+    text = state["user_input"]
+    history = state.get("history", [])
+    analysis = state.get("analysis") or {}
+
+    # 订单号与商品编号优先用确定性正则（含历史回填），模型结果仅作补充
+    order_no = _extract_order_no(text, history) or analysis.get("order_no")
+    product_id = _extract_product_id(text) or analysis.get("product_id")
+
+    request_type = state.get("request_type") or analysis.get("request_type") or "other"
 
     # 用确定性规则计算缺失字段，不信任模型自报的 missing_fields
     missing: List[str] = []
-    if request_type in ("query_logistics", "refund", "exchange", "damage_claim") and not order_no:
+    if request_type in ORDER_REQUIRED_TYPES and not order_no:
         missing.append("订单号")
     if request_type == "refund" and re.search(r"部分|单个|单品|其中一个|其中一件", text) and not product_id:
         missing.append("商品编号")
@@ -152,13 +202,15 @@ async def info_extract_agent(state: AfterSalesState):
 async def knowledge_retrieve_agent(state: AfterSalesState):
     start = time.time()
     query = f"{state['user_input']} {state.get('request_type', '')}".strip()
-    docs = await retrieve_knowledge(query)
+    result = await retrieve_knowledge_ex(query)
+    docs = result["docs"]
+    meta = result["meta"]
     trace_logger.log_node(state.get("trace_id", "-"), "knowledge_retrieve_agent", query,
                          [d.get("source") for d in docs], time.time() - start)
-    return {"policy_docs": docs}
+    return {"policy_docs": docs, "retrieval_meta": meta}
 
 
-# ==================== 节点 4：工具调用 Agent（LLM 自主选择）====================
+# ==================== 节点 4：工具调用 Agent ====================
 def _tool_call_message(tc) -> Dict:
     return {
         "id": tc.id,
@@ -177,9 +229,30 @@ def _has_enough(calls: List[Dict], request_type: str) -> bool:
     return False
 
 
-async def tool_agent(state: AfterSalesState):
-    start = time.time()
-    extract = state.get("extract_result", {})
+async def _call_tool(trace_id: str, name: str, args: Dict) -> Dict:
+    result = await execute_tool(name, args)
+    trace_logger.log_tool(trace_id, name, result["latency"], result["ok"])
+    return result
+
+
+async def _deterministic_tools(request_type: str, order_no: str, trace_id: str) -> List[Dict]:
+    """订单号与意图明确时的确定性工具路径：并发调用本地工具，省掉一轮 LLM 决策。"""
+    if request_type == "complaint":
+        return []
+    if request_type == "query_logistics":
+        return [await _call_tool(trace_id, "query_logistics", {"order_no": order_no})]
+
+    results = await asyncio.gather(
+        execute_tool("query_order", {"order_no": order_no}),
+        execute_tool("check_refund_eligibility", {"order_no": order_no, "request_type": request_type}),
+    )
+    for name, result in zip(("query_order", "check_refund_eligibility"), results):
+        trace_logger.log_tool(trace_id, name, result["latency"], result["ok"])
+    return list(results)
+
+
+async def _llm_tools(state: AfterSalesState, extract: Dict) -> List[Dict]:
+    """低置信场景保留 LLM 自主 tool-calling 能力。"""
     user_content = (
         f"用户问题：{state['user_input']}\n"
         f"已抽取信息：{_json_dumps(extract)}\n"
@@ -213,13 +286,11 @@ async def tool_agent(state: AfterSalesState):
                 args = json.loads(tc.function.arguments or "{}")
             except json.JSONDecodeError:
                 args = {}
-            result = await execute_tool(tc.function.name, args)
-            calls.append(result)
-            trace_logger.log_tool(state.get("trace_id", "-"), tc.function.name, result["latency"], result["ok"])
+            calls.append(await _call_tool(state.get("trace_id", "-"), tc.function.name, args))
             messages.append({
                 "role": "tool",
                 "tool_call_id": tc.id,
-                "content": _json_dumps(result["data"]),
+                "content": _json_dumps(calls[-1]["data"]),
             })
 
         if _has_enough(calls, state.get("request_type", "other")):
@@ -228,12 +299,29 @@ async def tool_agent(state: AfterSalesState):
     # 模型没有调用工具时，用确定性兜底保证业务数据不缺失
     if not calls and extract.get("order_no"):
         for tool_name in ("query_order", "query_logistics"):
-            result = await execute_tool(tool_name, {"order_no": extract["order_no"]})
-            calls.append(result)
-            trace_logger.log_tool(state.get("trace_id", "-"), tool_name, result["latency"], result["ok"])
+            calls.append(await _call_tool(state.get("trace_id", "-"), tool_name,
+                                          {"order_no": extract["order_no"]}))
+    return calls
 
-    trace_logger.log_node(state.get("trace_id", "-"), "tool_agent",
-                         user_content, [c["tool"] for c in calls], time.time() - start)
+
+async def tool_agent(state: AfterSalesState):
+    start = time.time()
+    extract = state.get("extract_result", {})
+    request_type = state.get("request_type", "other")
+    order_no = extract.get("order_no")
+    trace_id = state.get("trace_id", "-")
+
+    if request_type == "complaint":
+        # 投诉类无需查询业务数据，风控规则直接转人工
+        calls: List[Dict] = []
+    elif order_no and request_type in DETERMINISTIC_TOOL_TYPES:
+        calls = await _deterministic_tools(request_type, order_no, trace_id)
+    else:
+        calls = await _llm_tools(state, extract)
+
+    trace_logger.log_node(trace_id, "tool_agent",
+                         f"{request_type}/{order_no}", [c["tool"] for c in calls],
+                         time.time() - start)
     return {
         "tool_calls": calls,
         "tool_observations": [_json_dumps(c["data"]) for c in calls],
@@ -246,6 +334,7 @@ async def policy_check_agent(state: AfterSalesState):
     extract = state.get("extract_result", {})
     request_type = state.get("request_type", "other")
     order_no = extract.get("order_no")
+    order = await aget_order(order_no) if order_no else None
 
     amount = 0.0
     for call in state.get("tool_calls", []):
@@ -253,11 +342,10 @@ async def policy_check_agent(state: AfterSalesState):
         if data.get("found") and isinstance(data.get("amount"), (int, float)):
             amount = float(data["amount"])
             break
-    if not amount and order_no:
-        order = get_order(order_no)
-        amount = float(order["amount"]) if order else 0.0
+    if not amount and order:
+        amount = float(order["amount"]) if order.get("amount") else 0.0
 
-    order_exists = bool(order_no and get_order(order_no))
+    order_exists = bool(order)
     if request_type in ("refund", "exchange", "damage_claim") and not order_exists:
         decision = PolicyDecision(
             risk_level="medium", allow_auto=False, need_human=True,
@@ -290,7 +378,7 @@ async def ticket_generate_agent(state: AfterSalesState):
     audit = state.get("policy_audit", {})
     need_human = state.get("need_human_interrupt", False)
 
-    ticket = TicketService.create(
+    ticket = await TicketService.acreate(
         session_id=state.get("session_id", "unknown"),
         order_no=extract.get("order_no") or "",
         request_type=state.get("request_type", "other"),

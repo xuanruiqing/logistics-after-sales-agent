@@ -1,0 +1,22 @@
+{
+  "target": "DashScope OpenAI-compatible embeddings API",
+  "method": "在项目根目录使用服务端虚拟环境调用 src.clients.embed_texts；该底层客户端读取超时为 15 秒，不经过应用 API。",
+  "observations": [
+    {
+      "sequence": 1,
+      "input": "售后政策检索性能探测",
+      "ok": false,
+      "elapsed_s": 15.056,
+      "error_type": "ReadTimeout",
+      "error": "HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Read timed out. (read timeout=15)"
+    },
+    {
+      "sequence": 2,
+      "input": "售后政策检索稳定性复测",
+      "ok": true,
+      "elapsed_s": 0.266,
+      "dimensions": 1024
+    }
+  ],
+  "interpretation": "两次独立实测证明依赖存在间歇性波动；不能据此区分网络、配额或服务端触发原因。"
+}

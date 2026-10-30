@@ -1,0 +1,668 @@
+{
+  "summary": {
+    "total": 20,
+    "intent_acc": 100.0,
+    "info_acc": 100.0,
+    "status_acc": 100.0,
+    "human_acc": 100.0,
+    "tool_rate": 100.0,
+    "tool_false_positive": 0,
+    "citation_rate": 77.77777777777779,
+    "avg_elapsed": 4.8,
+    "p95_elapsed": 9.14,
+    "avg_elapsed_non_faq": 4.0,
+    "faq_hit": "2/2"
+  },
+  "rows": [
+    {
+      "id": "L01",
+      "input": "订单DD20260901001物流到哪了",
+      "expect_type": "query_logistics",
+      "actual_type": "query_logistics",
+      "expect_missing": [],
+      "actual_missing": [],
+      "expect_status": "ai_solved",
+      "actual_status": "ai_solved",
+      "expect_human": false,
+      "actual_human": false,
+      "tools_called": true,
+      "expect_tools": true,
+      "expect_faq": false,
+      "faq": false,
+      "citations": [
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 0
+        }
+      ],
+      "elapsed": 3.22,
+      "checks": {
+        "intent": true,
+        "info": true,
+        "status": true,
+        "human": true,
+        "faq": true,
+        "tool": true
+      },
+      "answer": "您好，您的订单DD20260901001物流信息如下：\n1. 当前状态：运输中，最新位置为郑州转运中心，信息更新时间2026-09-27 08:00:00，预计2026-09-29送达[来源: shouhouguize.txt#0]。\n2."
+    },
+    {
+      "id": "L02",
+      "input": "帮我查下DD20260905002的快递到哪了",
+      "expect_type": "query_logistics",
+      "actual_type": "query_logistics",
+      "expect_missing": [],
+      "actual_missing": [],
+      "expect_status": "ai_solved",
+      "actual_status": "ai_solved",
+      "expect_human": false,
+      "actual_human": false,
+      "tools_called": true,
+      "expect_tools": true,
+      "expect_faq": false,
+      "faq": false,
+      "citations": [
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 0
+        }
+      ],
+      "elapsed": 3.47,
+      "checks": {
+        "intent": true,
+        "info": true,
+        "status": true,
+        "human": true,
+        "faq": true,
+        "tool": true
+      },
+      "answer": "关于您查询的DD20260905002订单物流情况：\n1.  当前物流状态为已签收，于2026-09-07 16:20由用户本人签收，原预计送达时间为2026-09-07。\n2.  物流信息每24小时更新一次，预计送达时间仅作参考，可能受不"
+    },
+    {
+      "id": "L03",
+      "input": "DD20260910003什么时候能到",
+      "expect_type": "query_logistics",
+      "actual_type": "query_logistics",
+      "expect_missing": [],
+      "actual_missing": [],
+      "expect_status": "ai_solved",
+      "actual_status": "ai_solved",
+      "expect_human": false,
+      "actual_human": false,
+      "tools_called": true,
+      "expect_tools": true,
+      "expect_faq": false,
+      "faq": false,
+      "citations": [],
+      "elapsed": 2.34,
+      "checks": {
+        "intent": true,
+        "info": true,
+        "status": true,
+        "human": true,
+        "faq": true,
+        "tool": true
+      },
+      "answer": "您好，关于您查询的订单DD20260910003物流情况：\n1. 该包裹已于2026-09-12 10:10由您本人签收，原预计送达时间为2026-09-12。\n2. 若您对签收情况有疑问，可联系人工客服进一步核实。"
+    },
+    {
+      "id": "R01",
+      "input": "我要退款，订单DD20260910004",
+      "expect_type": "refund",
+      "actual_type": "refund",
+      "expect_missing": [],
+      "actual_missing": [],
+      "expect_status": "ai_solved",
+      "actual_status": "ai_solved",
+      "expect_human": false,
+      "actual_human": false,
+      "tools_called": true,
+      "expect_tools": true,
+      "expect_faq": false,
+      "faq": false,
+      "citations": [
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 0
+        },
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 1
+        }
+      ],
+      "elapsed": 4.31,
+      "checks": {
+        "intent": true,
+        "info": true,
+        "status": true,
+        "human": true,
+        "faq": true,
+        "tool": true
+      },
+      "answer": "您好，关于您订单DD20260910004的退款申请：\n1. 经核查，您的订单金额为39元，订单状态为已签收，符合低风险自动退款条件[来源: shouhouguize.txt#0]。\n2. 系统已自动审核通过您的退款申请，39元将在1-3个"
+    },
+    {
+      "id": "R02",
+      "input": "订单DD20260905002申请退款",
+      "expect_type": "refund",
+      "actual_type": "refund",
+      "expect_missing": [],
+      "actual_missing": [],
+      "expect_status": "pending_human",
+      "actual_status": "pending_human",
+      "expect_human": true,
+      "actual_human": true,
+      "tools_called": true,
+      "expect_tools": true,
+      "expect_faq": false,
+      "faq": false,
+      "citations": [
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 0
+        },
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 1
+        }
+      ],
+      "elapsed": 4.57,
+      "checks": {
+        "intent": true,
+        "info": true,
+        "status": true,
+        "human": true,
+        "faq": true,
+        "tool": true
+      },
+      "answer": "您好，关于您的订单DD20260905002退款申请：\n1. 经查询，您的订单为已签收的机械键盘，金额299元。\n2. 根据规则，订单金额50-500元的退款需人工客服审核通过后处理[来源: shouhouguize.txt#0]，目前无法"
+    },
+    {
+      "id": "R03",
+      "input": "订单DD20260910003退款",
+      "expect_type": "refund",
+      "actual_type": "refund",
+      "expect_missing": [],
+      "actual_missing": [],
+      "expect_status": "pending_human",
+      "actual_status": "pending_human",
+      "expect_human": true,
+      "actual_human": true,
+      "tools_called": true,
+      "expect_tools": true,
+      "expect_faq": false,
+      "faq": false,
+      "citations": [
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 0
+        },
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 1
+        }
+      ],
+      "elapsed": 3.32,
+      "checks": {
+        "intent": true,
+        "info": true,
+        "status": true,
+        "human": true,
+        "faq": true,
+        "tool": true
+      },
+      "answer": "您好，关于您订单DD20260910003的退款申请：\n1. 您的订单为智能手表，金额680元，状态为已签收。\n2. 根据规则，订单金额＞500元需售后主管审批，强制人工介入处理[来源: shouhouguize.txt#0]，无法自动审核"
+    },
+    {
+      "id": "R04",
+      "input": "我要退货，订单DD20260901001",
+      "expect_type": "refund",
+      "actual_type": "refund",
+      "expect_missing": [],
+      "actual_missing": [],
+      "expect_status": "pending_human",
+      "actual_status": "pending_human",
+      "expect_human": true,
+      "actual_human": true,
+      "tools_called": true,
+      "expect_tools": true,
+      "expect_faq": false,
+      "faq": false,
+      "citations": [
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 0
+        }
+      ],
+      "elapsed": 3.44,
+      "checks": {
+        "intent": true,
+        "info": true,
+        "status": true,
+        "human": true,
+        "faq": true,
+        "tool": true
+      },
+      "answer": "您好，关于您订单DD20260901001（无线蓝牙耳机，金额129元，状态已发货）的退货申请：\n1. 根据规则，订单金额50-500元需人工客服审核通过后处理[来源: shouhouguize.txt#0]，您的订单当前需转人工审核，暂无"
+    },
+    {
+      "id": "R05",
+      "input": "订单DD99999999999要退款",
+      "expect_type": "refund",
+      "actual_type": "refund",
+      "expect_missing": [],
+      "actual_missing": [],
+      "expect_status": "pending_human",
+      "actual_status": "pending_human",
+      "expect_human": true,
+      "actual_human": true,
+      "tools_called": true,
+      "expect_tools": true,
+      "expect_faq": false,
+      "faq": false,
+      "citations": [
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 0
+        },
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 1
+        }
+      ],
+      "elapsed": 4.06,
+      "checks": {
+        "intent": true,
+        "info": true,
+        "status": true,
+        "human": true,
+        "faq": true,
+        "tool": true
+      },
+      "answer": "您好，关于您的退款申请：\n1. 经系统查询，未查询到订单DD99999999999的有效信息，暂时无法判定退款资格。\n2. 根据风控审核结论，该情况需人工核实订单信息后再处理[来源: shouhouguize.txt#0、shouhougu"
+    },
+    {
+      "id": "E01",
+      "input": "我要换货，订单DD20260905002",
+      "expect_type": "exchange",
+      "actual_type": "exchange",
+      "expect_missing": [],
+      "actual_missing": [],
+      "expect_status": "pending_human",
+      "actual_status": "pending_human",
+      "expect_human": true,
+      "actual_human": true,
+      "tools_called": true,
+      "expect_tools": true,
+      "expect_faq": false,
+      "faq": false,
+      "citations": [
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 0
+        },
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 1
+        }
+      ],
+      "elapsed": 3.72,
+      "checks": {
+        "intent": true,
+        "info": true,
+        "status": true,
+        "human": true,
+        "faq": true,
+        "tool": true
+      },
+      "answer": "您好，关于您订单DD20260905002（机械键盘，299元，已签收）的换货申请：\n1. 您的订单金额为299元，属于50-500元区间，需人工审核处理[来源: shouhouguize.txt#0]。\n2. 目前需人工核验商品状态及是否"
+    },
+    {
+      "id": "E02",
+      "input": "这个键盘我想换一个，订单DD20260905002",
+      "expect_type": "exchange",
+      "actual_type": "exchange",
+      "expect_missing": [],
+      "actual_missing": [],
+      "expect_status": "pending_human",
+      "actual_status": "pending_human",
+      "expect_human": true,
+      "actual_human": true,
+      "tools_called": true,
+      "expect_tools": true,
+      "expect_faq": false,
+      "faq": false,
+      "citations": [
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 0
+        }
+      ],
+      "elapsed": 2.98,
+      "checks": {
+        "intent": true,
+        "info": true,
+        "status": true,
+        "human": true,
+        "faq": true,
+        "tool": true
+      },
+      "answer": "您好，关于您订单DD20260905002的机械键盘换货申请：\n1. 您的订单金额299元，属50-500元区间，需人工审核处理[来源: shouhouguize.txt#0]。\n2. 目前需核验商品状态及是否在7天无理由期限内，暂无法自动"
+    },
+    {
+      "id": "D01",
+      "input": "订单DD20260901001东西破损了，要理赔",
+      "expect_type": "damage_claim",
+      "actual_type": "damage_claim",
+      "expect_missing": [],
+      "actual_missing": [],
+      "expect_status": "pending_human",
+      "actual_status": "pending_human",
+      "expect_human": true,
+      "actual_human": true,
+      "tools_called": true,
+      "expect_tools": true,
+      "expect_faq": false,
+      "faq": false,
+      "citations": [
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 0
+        }
+      ],
+      "elapsed": 3.78,
+      "checks": {
+        "intent": true,
+        "info": true,
+        "status": true,
+        "human": true,
+        "faq": true,
+        "tool": true
+      },
+      "answer": "您好，关于您订单DD20260901001（无线蓝牙耳机，金额129元）的破损理赔申请：\n1. 该订单金额为50-500元区间，需人工审核处理[来源: shouhouguize.txt#0]。\n2. 破损理赔需您提供商品破损照片、快递面单照"
+    },
+    {
+      "id": "D02",
+      "input": "收到的耳机少件了，订单DD20260901001",
+      "expect_type": "damage_claim",
+      "actual_type": "damage_claim",
+      "expect_missing": [],
+      "actual_missing": [],
+      "expect_status": "pending_human",
+      "actual_status": "pending_human",
+      "expect_human": true,
+      "actual_human": true,
+      "tools_called": true,
+      "expect_tools": true,
+      "expect_faq": false,
+      "faq": false,
+      "citations": [
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 0
+        }
+      ],
+      "elapsed": 5.06,
+      "checks": {
+        "intent": true,
+        "info": true,
+        "status": true,
+        "human": true,
+        "faq": true,
+        "tool": true
+      },
+      "answer": "您好，关于您反馈订单DD20260901001无线蓝牙耳机少件的问题：\n1. 根据规则，配件缺失属于商家责任，支持全额退款或免费换货，往返运费由商家承担[来源: shouhouguize.txt#0]。\n2. 该类理赔需您提供商品及快递面单"
+    },
+    {
+      "id": "D03",
+      "input": "订单DD20260905002商品损坏，要求补发",
+      "expect_type": "damage_claim",
+      "actual_type": "damage_claim",
+      "expect_missing": [],
+      "actual_missing": [],
+      "expect_status": "pending_human",
+      "actual_status": "pending_human",
+      "expect_human": true,
+      "actual_human": true,
+      "tools_called": true,
+      "expect_tools": true,
+      "expect_faq": false,
+      "faq": false,
+      "citations": [
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 0
+        }
+      ],
+      "elapsed": 13.04,
+      "checks": {
+        "intent": true,
+        "info": true,
+        "status": true,
+        "human": true,
+        "faq": true,
+        "tool": true
+      },
+      "answer": "您好，关于您订单DD20260905002（机械键盘，299元，已签收）的破损补发申请：\n1. 按规则，内物破损支持免费换货/全额退款，往返运费由商家承担，需在签收后24小时内提供商品破损照片、快递面单照片申请[来源: shouhougui"
+    },
+    {
+      "id": "C01",
+      "input": "我要投诉，客服态度太差",
+      "expect_type": "complaint",
+      "actual_type": "complaint",
+      "expect_missing": [],
+      "actual_missing": [],
+      "expect_status": "pending_human",
+      "actual_status": "pending_human",
+      "expect_human": true,
+      "actual_human": true,
+      "tools_called": false,
+      "expect_tools": false,
+      "expect_faq": false,
+      "faq": false,
+      "citations": [
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 1
+        },
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 0
+        }
+      ],
+      "elapsed": 9.14,
+      "checks": {
+        "intent": true,
+        "info": true,
+        "status": true,
+        "human": true,
+        "faq": true,
+        "tool": true
+      },
+      "answer": "您好，关于您反馈的客服态度问题，我们已为您生成投诉工单：\n1. 工单编号：TK310374842B\n2. 根据规则，投诉类工单将在24小时内安排专属客服跟进处理[来源: shouhouguize.txt#1]\n3. 后续您可通过工单编号查询"
+    },
+    {
+      "id": "C02",
+      "input": "你们客服一直不回复我，我要投诉",
+      "expect_type": "complaint",
+      "actual_type": "complaint",
+      "expect_missing": [],
+      "actual_missing": [],
+      "expect_status": "pending_human",
+      "actual_status": "pending_human",
+      "expect_human": true,
+      "actual_human": true,
+      "tools_called": false,
+      "expect_tools": false,
+      "expect_faq": false,
+      "faq": false,
+      "citations": [
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 1
+        },
+        {
+          "source": "shouhouguize.txt",
+          "chunk_index": 0
+        }
+      ],
+      "elapsed": 5.48,
+      "checks": {
+        "intent": true,
+        "info": true,
+        "status": true,
+        "human": true,
+        "faq": true,
+        "tool": true
+      },
+      "answer": "非常抱歉给您带来不好的体验，关于您反馈的客服未及时回复的投诉，我们将按规则处理：\n1. 您的投诉工单已生成，编号：TKD5C1DD3D4A，根据规则，投诉类工单将在24小时内安排专属客服跟进处理[来源: shouhouguize.txt#1"
+    },
+    {
+      "id": "M01",
+      "input": "我要退款",
+      "expect_type": "refund",
+      "actual_type": "refund",
+      "expect_missing": [
+        "订单号"
+      ],
+      "actual_missing": [
+        "订单号"
+      ],
+      "expect_status": "pending_info",
+      "actual_status": "pending_info",
+      "expect_human": false,
+      "actual_human": false,
+      "tools_called": false,
+      "expect_tools": false,
+      "expect_faq": false,
+      "faq": false,
+      "citations": [],
+      "elapsed": 0.0,
+      "checks": {
+        "intent": true,
+        "info": true,
+        "status": true,
+        "human": true,
+        "faq": true,
+        "tool": null
+      },
+      "answer": "请补充以下信息：订单号"
+    },
+    {
+      "id": "M02",
+      "input": "订单破损了要理赔",
+      "expect_type": "damage_claim",
+      "actual_type": "damage_claim",
+      "expect_missing": [
+        "订单号"
+      ],
+      "actual_missing": [
+        "订单号"
+      ],
+      "expect_status": "pending_info",
+      "actual_status": "pending_info",
+      "expect_human": false,
+      "actual_human": false,
+      "tools_called": false,
+      "expect_tools": false,
+      "expect_faq": false,
+      "faq": false,
+      "citations": [],
+      "elapsed": 0.0,
+      "checks": {
+        "intent": true,
+        "info": true,
+        "status": true,
+        "human": true,
+        "faq": true,
+        "tool": null
+      },
+      "answer": "请补充以下信息：订单号"
+    },
+    {
+      "id": "M03",
+      "input": "订单DD20260901001我要部分退款，退其中一个商品",
+      "expect_type": "refund",
+      "actual_type": "refund",
+      "expect_missing": [
+        "商品编号"
+      ],
+      "actual_missing": [
+        "商品编号"
+      ],
+      "expect_status": "pending_info",
+      "actual_status": "pending_info",
+      "expect_human": false,
+      "actual_human": false,
+      "tools_called": false,
+      "expect_tools": false,
+      "expect_faq": false,
+      "faq": false,
+      "citations": [],
+      "elapsed": 0.0,
+      "checks": {
+        "intent": true,
+        "info": true,
+        "status": true,
+        "human": true,
+        "faq": true,
+        "tool": null
+      },
+      "answer": "请补充以下信息：商品编号"
+    },
+    {
+      "id": "F01",
+      "input": "退货运费谁承担",
+      "expect_type": null,
+      "actual_type": null,
+      "expect_missing": [],
+      "actual_missing": null,
+      "expect_status": "ai_solved",
+      "actual_status": "ai_solved",
+      "expect_human": false,
+      "actual_human": false,
+      "tools_called": false,
+      "expect_tools": false,
+      "expect_faq": true,
+      "faq": true,
+      "citations": [],
+      "elapsed": 0.0,
+      "checks": {
+        "intent": null,
+        "info": null,
+        "status": true,
+        "human": true,
+        "faq": true,
+        "tool": null
+      },
+      "answer": "您好，运费说明：\n- 质量问题、发错货、漏发：商家承担往返运费\n- 7天无理由退换：买家承担寄回运费\n- 偏远地区（新疆、西藏、青海）需补运费差价"
+    },
+    {
+      "id": "F02",
+      "input": "你们客服工作时间是几点",
+      "expect_type": null,
+      "actual_type": null,
+      "expect_missing": [],
+      "actual_missing": null,
+      "expect_status": "ai_solved",
+      "actual_status": "ai_solved",
+      "expect_human": false,
+      "actual_human": false,
+      "tools_called": false,
+      "expect_tools": false,
+      "expect_faq": true,
+      "faq": true,
+      "citations": [],
+      "elapsed": 0.0,
+      "checks": {
+        "intent": null,
+        "info": null,
+        "status": true,
+        "human": true,
+        "faq": true,
+        "tool": null
+      },
+      "answer": "您好，人工客服工作时间为周一至周日 9:00-18:00，智能客服24小时在线为您服务。"
+    }
+  ]
+}
