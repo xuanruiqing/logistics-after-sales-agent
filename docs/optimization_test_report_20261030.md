@@ -165,7 +165,7 @@
 | HTTP 接口 | `/api/health`（nodes=7）、`/api/tickets/{id}`、`/api/tickets/{id}/review` 在压测中被反复调用 | 成功率 100% |
 | 数据库 | Windows 下 SQLite WAL、`busy_timeout`、线程内连接复用，20 轮并发工单写入与复核 | 无锁错误、无失败 |
 | 依赖 | `httpx==0.28.1`、`psutil==7.0.0` 已写入 `requirements.txt` | 安装可用 |
-| 前端 | 新增字段未被 `index.html` 消费，SSE 解析保持原逻辑 | 页面行为不变 |
+| 前端工作台 | 新版 `index.html`（智能工作台 + 工单管理 + 人工复核）在 Edge 实跑：SSE 逐节点点亮流水线、政策引用与工单卡片、工单列表与状态筛选、抽屉内复核均正常；页面所需 4 个接口均存在 | 页面行为正常，无接口缺失 |
 
 ### 5.2 回归风险与说明
 
