@@ -198,13 +198,12 @@
 
 ## 8. 代码提交
 
-- 本地提交：`b2c964d perf: 检索依赖治理与工作流并行化，核心链路 P95 降低 49%`（55 个文件，含本次优化、测试报告与评测数据）。
-- 远端仓库：`xuanruiqing/logistics-after-sales-agent`（`main`），已配置 `origin`。
-- 推送状态：**未完成**。当前网络 `github.com:443` 不可达（git 连接被重置/超时，`ssh.github.com:443` 虽可连但本机无 SSH 私钥），`api.github.com` 可访问。待网络恢复或提供具备 `Contents: Write` 权限的 Token 后，执行：
+- 提交：`eab3e21 perf: 检索依赖治理与工作流并行化，核心链路 P95 降低 49%`（39 个文件变更：19 修改 / 20 新增，含本次优化、测试报告与评测数据）。
+- 远端仓库：`xuanruiqing/logistics-after-sales-agent`（`main`），远端 `main` 已更新为 `eab3e21`。
+- 推送状态：**已完成**。本地提交基于远端 `353f411` 之上，历史线性、无需强推；推送经本地代理 `127.0.0.1:7897` 完成。
+- 复现命令：
 
 ```powershell
-git push -u origin main
+git -c http.proxy=http://127.0.0.1:7897 -c https.proxy=http://127.0.0.1:7897 push -u origin main
 ```
-
-> 注意：远端 `main` 最新提交为 `353f411`，本地为全新根提交，直接推送会因历史不相关被拒绝；需先拉取远端历史（或由维护者以 squash/合并方式落地）。
 
